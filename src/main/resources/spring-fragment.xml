@@ -30,4 +30,15 @@
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 
+	<bean id="sqlSessionFactory2" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:Configuration.xml" />
+		<property name="dataSource" ref="dataSource2" />
+		<property name="mapperLocations" value="classpath*:indi/demo/flying/mapper2/*.xml" />
+		<property name="typeAliasesPackage" value="indi.demo.flying" />
+	</bean>
+
+	<bean id="mapperScannerConfigurer2" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="indi.demo.flying.mapper2" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
 </beans>
