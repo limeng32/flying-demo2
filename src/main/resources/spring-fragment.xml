@@ -39,6 +39,6 @@
 
 	<bean id="mapperScannerConfigurer2" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="indi.demo.flying.mapper2" />
-		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory2" />
 	</bean>
 </beans>

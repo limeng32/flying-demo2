@@ -35,7 +35,7 @@
 		flying:delete
 	</delete>
 
-	<resultMap id="result" type="Cart" autoMapping="true">
+	<resultMap id="result" type="Person" autoMapping="true">
 		<id property="id" column="ID" />
 		<result property="name" column="NAME" />
 		<association property="role" javaType="Role"

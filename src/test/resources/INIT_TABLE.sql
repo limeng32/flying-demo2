@@ -1,6 +1,6 @@
 drop table if exists CART;
 
-drop table if exists Commodity;
+drop table if exists COMMODITY;
 
 drop table if exists CART_COMMODITY;
 
