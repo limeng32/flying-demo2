@@ -123,13 +123,13 @@
 		<servlet.version>3.0.1</servlet.version>
 	</properties>
 	<build>
-		<finalName>flying-demo</finalName>
+		<finalName>flying-demo2</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<configuration>
-					<path>/flying-demo</path>
+					<path>/flying-demo2</path>
 					<systemProperties>
 						<com.sun.management.jmxremote.port>4000</com.sun.management.jmxremote.port>
 					</systemProperties>

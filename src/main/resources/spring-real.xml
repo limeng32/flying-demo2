@@ -29,6 +29,21 @@
 	<!-- 测试环境下初始化dataSource表结构 -->
 	<jdbc:initialize-database data-source="dataSource"
 		ignore-failures="ALL">
+		<jdbc:script location="classpath:/INIT_TABLE.sql"
+			encoding="UTF-8" />
+	</jdbc:initialize-database>
+
+	<bean id="dataSource2" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="org.h2.jdbcx.JdbcDataSource" />
+		<property name="url"
+			value="jdbc:h2:mem:realdb2;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"></property>
+		<property name="username" value="sa"></property>
+		<property name="password" value=""></property>
+	</bean>
+	<!-- 测试环境下初始化dataSource表结构 -->
+	<jdbc:initialize-database data-source="dataSource2"
+		ignore-failures="ALL">
 		<jdbc:script location="classpath:/INIT_TABLE2.sql"
 			encoding="UTF-8" />
 	</jdbc:initialize-database>
