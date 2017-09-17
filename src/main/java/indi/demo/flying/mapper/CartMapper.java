@@ -3,7 +3,9 @@ package indi.demo.flying.mapper;
 import java.util.Collection;
 
 import indi.demo.flying.entity.Cart;
+import indi.mybatis.flying.annotations.CacheRoleAnnotation;
 
+@CacheRoleAnnotation(ObserverClass = {}, TriggerClass = { Cart.class })
 public interface CartMapper {
 
 	public Cart mySelect(Object id);

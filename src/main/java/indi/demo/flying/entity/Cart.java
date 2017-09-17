@@ -6,6 +6,7 @@ import org.apache.ibatis.type.JdbcType;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
+import indi.demo.flying.entity2.Person;
 import indi.mybatis.flying.annotations.FieldMapperAnnotation;
 import indi.mybatis.flying.annotations.TableMapperAnnotation;
 
@@ -36,6 +37,11 @@ public class Cart implements Serializable {
 	@JSONField(format = "yyyy-MM-dd hh:mm:ss")
 	private java.util.Date dealTime;
 
+	@FieldMapperAnnotation(dbFieldName = "PERSON_ID", jdbcType = JdbcType.VARCHAR)
+	private String personId;
+
+	private Person person;
+
 	public String getId() {
 		return id;
 	}
@@ -58,6 +64,22 @@ public class Cart implements Serializable {
 
 	public void setDealTime(java.util.Date dealTime) {
 		this.dealTime = dealTime;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+	public String getPersonId() {
+		return personId;
+	}
+
+	public void setPersonId(String personId) {
+		this.personId = personId;
 	}
 
 }

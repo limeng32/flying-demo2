@@ -39,5 +39,6 @@
 		<id property="id" column="ID" />
 		<result property="deal" column="DEAL" />
 		<result property="dealTime" column="DEAL_TIME" />
+		<result property="personId" column="PERSON_ID" />
 	</resultMap>
 </mapper>

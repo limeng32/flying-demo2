@@ -3,7 +3,9 @@ package indi.demo.flying.mapper2;
 import java.util.Collection;
 
 import indi.demo.flying.entity2.Role;
+import indi.mybatis.flying.annotations.CacheRoleAnnotation;
 
+@CacheRoleAnnotation(ObserverClass = {}, TriggerClass = { Role.class })
 public interface RoleMapper {
 
 	public Role mySelect(Object id);

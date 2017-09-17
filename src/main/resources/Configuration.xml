@@ -24,5 +24,10 @@
 		<plugin interceptor="indi.mybatis.flying.interceptors.AutoMapperInterceptor">
 			<property name="dialect" value="mysql" />
 		</plugin>
+		<plugin interceptor="indi.mybatis.flying.interceptors.EnhancedCachingInterceptor">
+			<property name="cacheEnabled" value="true" />
+			<property name="annotationPackage"
+				value="indi.demo.flying.mapper,indi.demo.flying.mapper2" />
+		</plugin>
 	</plugins>
 </configuration>

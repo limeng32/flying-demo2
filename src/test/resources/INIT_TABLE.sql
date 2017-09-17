@@ -9,6 +9,7 @@ create table CART
    ID         			varchar(40) not null ,
    DEAL                 tinyint ,
    DEAL_TIME            datetime ,
+   PERSON_ID			varchar(40),
    primary key (ID)
 );
 

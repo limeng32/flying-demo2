@@ -3,7 +3,10 @@ package indi.demo.flying.mapper2;
 import java.util.Collection;
 
 import indi.demo.flying.entity2.Person;
+import indi.demo.flying.entity2.Role;
+import indi.mybatis.flying.annotations.CacheRoleAnnotation;
 
+@CacheRoleAnnotation(ObserverClass = { Role.class }, TriggerClass = { Person.class })
 public interface PersonMapper {
 
 	public Person mySelect(Object id);
