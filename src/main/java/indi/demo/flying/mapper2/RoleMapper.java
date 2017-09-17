@@ -1,6 +1,7 @@
 package indi.demo.flying.mapper2;
 
 import java.util.Collection;
+import java.util.Map;
 
 import indi.demo.flying.entity2.Role;
 import indi.mybatis.flying.annotations.CacheAnnotation;
@@ -32,4 +33,9 @@ public interface RoleMapper {
 
 	@CacheAnnotation(role = CacheRoleType.Observer)
 	public int myCount(Role t);
+
+	@CacheAnnotation(role = CacheRoleType.Trigger)
+	public int updateDirect(Map<String, Object> t);
+
+	public int updateDirectWithoutCache(Map<String, Object> t);
 }

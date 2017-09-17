@@ -1,0 +1,8 @@
+<dataset>
+	<PERSON NAME="张三" />
+	<PERSON NAME="李四" />
+
+	<ROLE NAME="普通会员2" VALUE="normal" />
+	<ROLE NAME="银牌会员" VALUE="silver" />
+	<ROLE NAME="金牌会员" VALUE="gold" />
+</dataset>

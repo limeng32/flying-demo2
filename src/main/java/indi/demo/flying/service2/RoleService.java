@@ -1,6 +1,7 @@
 package indi.demo.flying.service2;
 
 import java.util.Collection;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,6 +53,16 @@ public class RoleService implements RoleMapper {
 	@Override
 	public int myCount(Role t) {
 		return mapper.myCount(t);
+	}
+
+	@Override
+	public int updateDirectWithoutCache(Map<String, Object> t) {
+		return mapper.updateDirectWithoutCache(t);
+	}
+
+	@Override
+	public int updateDirect(Map<String, Object> t) {
+		return mapper.updateDirect(t);
 	}
 
 }
