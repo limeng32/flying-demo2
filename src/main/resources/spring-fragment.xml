@@ -41,4 +41,6 @@
 		<property name="basePackage" value="indi.demo.flying.mapper2" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory2" />
 	</bean>
+
+	<bean id="applicationContextProvder" class="indi.demo.flying.ApplicationContextProvider" />
 </beans>

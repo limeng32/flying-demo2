@@ -13,7 +13,7 @@
 		<setting name="multipleResultSetsEnabled" value="true" />
 	</settings>
 	<typeAliases>
-		<package name="indi.mybatis.flying.handlers" />
+		<package name="indi.demo.flying.typeHandler" />
 		<package name="org.apache.ibatis.type" />
 	</typeAliases>
 	<typeHandlers>

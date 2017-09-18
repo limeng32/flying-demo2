@@ -53,5 +53,9 @@ public class PersonService implements PersonMapper {
 	public int myCount(Person t) {
 		return mapper.myCount(t);
 	}
+	
+	public PersonMapper m(){
+		return mapper;
+	}
 
 }
