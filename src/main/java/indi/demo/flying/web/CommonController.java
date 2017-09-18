@@ -2,6 +2,8 @@ package indi.demo.flying.web;
 
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,14 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import indi.demo.flying.entity.Cart;
 import indi.demo.flying.entity.CartCommodity;
 import indi.demo.flying.entity.Commodity;
+import indi.demo.flying.entity2.Person;
+import indi.demo.flying.entity2.Role;
 import indi.demo.flying.service.CartCommodityService;
 import indi.demo.flying.service.CartService;
 import indi.demo.flying.service.CommodityService;
-import indi.mybatis.flying.models.Conditionable;
-import indi.mybatis.flying.pagination.Order;
-import indi.mybatis.flying.pagination.Page;
-import indi.mybatis.flying.pagination.PageParam;
-import indi.mybatis.flying.pagination.SortParam;
+import indi.demo.flying.service2.PersonService;
+import indi.demo.flying.service2.RoleService;
 
 @Controller
 public class CommonController {
@@ -38,6 +39,12 @@ public class CommonController {
 
 	@Autowired
 	private CommodityService commodityService;
+
+	@Autowired
+	private PersonService personService;
+
+	@Autowired
+	private RoleService roleService;
 
 	@RequestMapping(method = { RequestMethod.GET }, value = "/getCart")
 	public String getCart(HttpServletRequest request, HttpServletResponse response, ModelMap mm,
@@ -69,7 +76,7 @@ public class CommonController {
 
 	@RequestMapping(method = { RequestMethod.GET }, value = "/updateCommodity")
 	public String updateCommodity(HttpServletRequest request, HttpServletResponse response, ModelMap mm,
-			@RequestParam(value = "id", required = false) Integer id,
+			@RequestParam(value = "id", required = false) String id,
 			@RequestParam(value = "price", required = false) Integer price,
 			@RequestParam(value = "name", required = false) String name) {
 		Commodity commodity = commodityService.mySelect(id);
@@ -94,6 +101,9 @@ public class CommonController {
 		CartCommodity cartCommodityCondition = new CartCommodity();
 		cartCommodityCondition.setCart(cartCondition);
 		Collection<CartCommodity> cartCommodityC = cartCommodityService.mySelectAll(cartCommodityCondition);
+		for (CartCommodity e : cartCommodityC) {
+			e.getCart().setPerson(personService.mySelect(e.getCart().getPersonId()));
+		}
 		mm.addAttribute("_content", cartCommodityC);
 		return UNIQUE_VIEW_NAME;
 	}
@@ -129,6 +139,52 @@ public class CommonController {
 			Collection<CartCommodity> cartCommodityC = cartCommodityService.mySelectAll(cartCommodityCondition);
 			mm.addAttribute("_content", cartCommodityC);
 		}
+		return UNIQUE_VIEW_NAME;
+	}
+
+	@RequestMapping(method = { RequestMethod.GET }, value = "/getPerson")
+	public String getPerson(HttpServletRequest request, HttpServletResponse response, ModelMap mm,
+			@RequestParam("id") String id) {
+		Person person = personService.mySelect(id);
+		mm.addAttribute("_content", person);
+		return UNIQUE_VIEW_NAME;
+	}
+
+	@RequestMapping(method = { RequestMethod.GET }, value = "/getRole")
+	public String getRole(HttpServletRequest request, HttpServletResponse response, ModelMap mm,
+			@RequestParam("id") String id) {
+		Role role = roleService.mySelect(id);
+		mm.addAttribute("_content", role);
+		return UNIQUE_VIEW_NAME;
+	}
+
+	@RequestMapping(method = { RequestMethod.GET }, value = "/updateRoleDirectly")
+	public String updateRoleDirectly(HttpServletRequest request, HttpServletResponse response, ModelMap mm,
+			@RequestParam(value = "id", required = false) String id,
+			@RequestParam(value = "name", required = false) String name) {
+		if (id != null) {
+			Map<String, Object> m = new HashMap<>();
+			m.put("id", id);
+			m.put("name", name);
+			roleService.updateDirect(m);
+		}
+		Role role = roleService.mySelect(id);
+		mm.addAttribute("_content", role);
+		return UNIQUE_VIEW_NAME;
+	}
+
+	@RequestMapping(method = { RequestMethod.GET }, value = "/updateRoleDirectlyWithoutCache")
+	public String updateRoleDirectlyWithoutCache(HttpServletRequest request, HttpServletResponse response, ModelMap mm,
+			@RequestParam(value = "id", required = false) String id,
+			@RequestParam(value = "name", required = false) String name) {
+		if (id != null) {
+			Map<String, Object> m = new HashMap<>();
+			m.put("id", id);
+			m.put("name", name);
+			roleService.updateDirectWithoutCache(m);
+		}
+		Role role = roleService.mySelect(id);
+		mm.addAttribute("_content", role);
 		return UNIQUE_VIEW_NAME;
 	}
 }
