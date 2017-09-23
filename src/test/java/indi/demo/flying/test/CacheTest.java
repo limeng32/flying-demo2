@@ -70,24 +70,24 @@ public class CacheTest {
 	public void testCache() {
 
 		Role r1 = new Role(), r2 = new Role(), r3 = new Role();
-		r1.setName("普通会员");
+		r1.setName("normal");
 		r1.setValue(RoleEnum.normal);
 		roleService.myInsert(r1);
 
-		r2.setName("银牌会员");
+		r2.setName("silver");
 		r2.setValue(RoleEnum.silver);
 		roleService.myInsert(r2);
 
-		r3.setName("金牌会员");
+		r3.setName("gold");
 		r3.setValue(RoleEnum.gold);
 		roleService.myInsert(r3);
 
 		Person p1 = new Person(), p2 = new Person();
-		p1.setName("张三");
+		p1.setName("zhangsan");
 		p1.setRole(r1);
 		personService.myInsert(p1);
 
-		p2.setName("李四");
+		p2.setName("lisi");
 		p2.setRole(r2);
 		personService.myInsert(p2);
 
@@ -97,22 +97,22 @@ public class CacheTest {
 		cartService.myInsert(c1);
 
 		Cart cart = cartService.mySelect(c1.getId());
-		Assert.assertEquals("普通会员", cart.getPerson().getRole().getName());
+		Assert.assertEquals("normal", cart.getPerson().getRole().getName());
 
 		Map<String, Object> m = new HashMap<>();
 		m.put("id", r1.getId());
-		m.put("name", "普通会员1");
+		m.put("name", "normal1");
 		roleService.updateDirectWithoutCache(m);
 
 		cart = cartService.mySelect(c1.getId());
-		Assert.assertEquals("普通会员", cart.getPerson().getRole().getName());
+		Assert.assertEquals("normal", cart.getPerson().getRole().getName());
 
 		Map<String, Object> m2 = new HashMap<>();
 		m2.put("id", r1.getId());
-		m2.put("name", "普通会员2");
+		m2.put("name", "normal2");
 		roleService.updateDirect(m2);
 
 		cart = cartService.mySelect(c1.getId());
-		Assert.assertEquals("普通会员2", cart.getPerson().getRole().getName());
+		Assert.assertEquals("normal2", cart.getPerson().getRole().getName());
 	}
 }

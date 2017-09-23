@@ -4,11 +4,12 @@ import java.util.Collection;
 
 import indi.demo.flying.entity.Cart;
 import indi.demo.flying.entity2.Person;
+import indi.demo.flying.entity2.Role;
 import indi.mybatis.flying.annotations.CacheAnnotation;
 import indi.mybatis.flying.annotations.CacheRoleAnnotation;
 import indi.mybatis.flying.statics.CacheRoleType;
 
-@CacheRoleAnnotation(ObserverClass = { Person.class }, TriggerClass = { Cart.class })
+@CacheRoleAnnotation(ObserverClass = { Person.class,Role.class }, TriggerClass = { Cart.class })
 public interface CartMapper {
 
 	@CacheAnnotation(role = CacheRoleType.Observer)
