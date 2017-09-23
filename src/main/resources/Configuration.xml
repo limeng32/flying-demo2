@@ -14,6 +14,7 @@
 	</settings>
 	<typeAliases>
 		<package name="indi.demo.flying.typeHandler" />
+		<package name="indi.mybatis.flying.handlers" />
 		<package name="org.apache.ibatis.type" />
 	</typeAliases>
 	<typeHandlers>
