@@ -1,5 +1,7 @@
 package indi.demo.flying.test;
 
+import java.util.Collection;
+
 import javax.sql.DataSource;
 
 import org.junit.Assert;
@@ -67,9 +69,11 @@ public class EntityTest4 {
 	public void testPersonAndCart() {
 		Cart c = new Cart();
 		Person p = new Person();
-		p.setId("pp");
+		p.setId("mmm");
 		c.setPerson(p);
 		Cart cart = cartService.mySelectOne(c);
+		Collection<Cart> cartC = cartService.mySelectAll(c);
+		Assert.assertEquals(1, cartC.size());
 
 		Cart cart2 = cartService.mySelect("aaa");
 		Assert.assertEquals("zhangsan", cart2.getPerson().getName());
@@ -78,7 +82,6 @@ public class EntityTest4 {
 		p2.setId("nnn");
 		cart2.setPerson(p2);
 		cartService.myUpdate(cart2);
-
 		cartService.myUpdatePersistent(cart2);
 	}
 }
