@@ -7,8 +7,6 @@ import java.sql.SQLException;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
-import org.apache.ibatis.type.MappedJdbcTypes;
-import org.apache.ibatis.type.MappedTypes;
 import org.apache.ibatis.type.TypeHandler;
 
 import indi.demo.flying.ApplicationContextProvider;
@@ -21,8 +19,8 @@ import indi.demo.flying.service2.PersonService;
  * @author limeng32
  * 
  */
-@MappedTypes({ Person.class })
-@MappedJdbcTypes({ JdbcType.VARCHAR })
+// @MappedTypes({ Person.class })
+// @MappedJdbcTypes({ JdbcType.VARCHAR })
 
 public class PersonTypeHandler extends BaseTypeHandler<Person> implements TypeHandler<Person> {
 
@@ -52,7 +50,9 @@ public class PersonTypeHandler extends BaseTypeHandler<Person> implements TypeHa
 
 	@Override
 	public void setNonNullParameter(PreparedStatement arg0, int arg1, Person arg2, JdbcType arg3) throws SQLException {
-		arg0.setString(arg1, arg2.getId());
+		if (arg2 != null) {
+			arg0.setString(arg1, arg2.getId());
+		}
 	}
 
 	private PersonService getService() {

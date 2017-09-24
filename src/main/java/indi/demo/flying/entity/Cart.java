@@ -37,7 +37,7 @@ public class Cart implements Serializable {
 	@JSONField(format = "yyyy-MM-dd hh:mm:ss")
 	private java.util.Date dealTime;
 
-	@FieldMapperAnnotation(dbFieldName = "PERSON_ID", jdbcType = JdbcType.VARCHAR, dbAssociationUniqueKey = "ID")
+	@FieldMapperAnnotation(dbFieldName = "PERSON_ID", jdbcType = JdbcType.VARCHAR, typeHandler = indi.demo.flying.typeHandler.PersonTypeHandler.class)
 	private Person person;
 
 	public String getId() {

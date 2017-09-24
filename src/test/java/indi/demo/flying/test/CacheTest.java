@@ -95,6 +95,12 @@ public class CacheTest {
 		c1.setDeal(false);
 		c1.setPerson(p1);
 		cartService.myInsert(c1);
+		
+//		Person p_ = new Person();
+//		p_.setId(p1.getId());
+//		Cart cc = new Cart();
+//		cc.setPerson(p_);
+//		Cart c_ = cartService.mySelectOne(cc);
 
 		Cart cart = cartService.mySelect(c1.getId());
 		Assert.assertEquals("normal", cart.getPerson().getRole().getName());
