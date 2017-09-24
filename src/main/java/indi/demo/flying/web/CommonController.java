@@ -101,9 +101,6 @@ public class CommonController {
 		CartCommodity cartCommodityCondition = new CartCommodity();
 		cartCommodityCondition.setCart(cartCondition);
 		Collection<CartCommodity> cartCommodityC = cartCommodityService.mySelectAll(cartCommodityCondition);
-		for (CartCommodity e : cartCommodityC) {
-			e.getCart().setPerson(personService.mySelect(e.getCart().getPersonId()));
-		}
 		mm.addAttribute("_content", cartCommodityC);
 		return UNIQUE_VIEW_NAME;
 	}

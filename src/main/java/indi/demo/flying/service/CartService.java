@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import indi.demo.flying.entity.Cart;
 import indi.demo.flying.mapper.CartMapper;
-import indi.demo.flying.service2.PersonService;
 
 @Service
 public class CartService implements CartMapper {
@@ -15,35 +14,21 @@ public class CartService implements CartMapper {
 	@Autowired
 	private CartMapper mapper;
 
-	@Autowired
-	private PersonService personService;
-
 	@Override
 	public Cart mySelect(Object id) {
 		Cart ret = mapper.mySelect(id);
-		if (ret.getPersonId() != null) {
-			ret.setPerson(personService.mySelect(ret.getPersonId()));
-		}
 		return ret;
 	}
 
 	@Override
 	public Collection<Cart> mySelectAll(Cart t) {
 		Collection<Cart> ret = mapper.mySelectAll(t);
-		for (Cart e : ret) {
-			if (e.getPersonId() != null) {
-				e.setPerson(personService.mySelect(e.getPersonId()));
-			}
-		}
 		return ret;
 	}
 
 	@Override
 	public Cart mySelectOne(Cart t) {
 		Cart ret = mapper.mySelectOne(t);
-		if (ret.getPersonId() != null) {
-			ret.setPerson(personService.mySelect(ret.getPersonId()));
-		}
 		return ret;
 	}
 
