@@ -27,14 +27,14 @@ public class CartCommodity implements Serializable {
 	private Cart cart;
 
 	/**
-	 * 对应的商品
+	 * associate commodity
 	 * 
 	 */
 	@FieldMapperAnnotation(dbFieldName = "COMM_ID", jdbcType = JdbcType.VARCHAR, dbAssociationUniqueKey = "ID")
 	private Commodity commodity;
 
 	/**
-	 * 商品的数量
+	 * commodity amount
 	 * 
 	 */
 	@FieldMapperAnnotation(dbFieldName = "AMOUNT", jdbcType = JdbcType.INTEGER)

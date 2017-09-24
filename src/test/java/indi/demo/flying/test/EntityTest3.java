@@ -67,16 +67,18 @@ public class EntityTest3 {
 			@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = "/indi/demo/flying/test/entityTest3/testPersonAndCart.dataSource2.result.xml", connection = "dataSource2"), })
 	public void testPersonAndCart() {
 		Cart cart = cartService.mySelect("aaa");
-		Assert.assertEquals("普通会员", cart.getPerson().getRole().getName());
+		Assert.assertEquals("锟斤拷通锟斤拷员", cart.getPerson().getRole().getName());
 
 		Role role = roleService.mySelect("bbb");
 		Person person = personService.mySelect("mmm");
 		person.setRole(role);
 		personService.myUpdate(person);
 		cart = cartService.mySelect("aaa");
-		Assert.assertEquals("银牌会员", cart.getPerson().getRole().getName());
+		Assert.assertEquals("锟斤拷锟狡伙拷员", cart.getPerson().getRole().getName());
 
-		cart.setPersonId("nnn");
+		Person p = new Person();
+		p.setId("nnn");
+		cart.setPerson(p);
 		cartService.myUpdate(cart);
 	}
 }

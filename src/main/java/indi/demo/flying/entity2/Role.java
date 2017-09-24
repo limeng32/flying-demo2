@@ -20,14 +20,14 @@ public class Role implements Serializable {
 	private String id;
 
 	/**
-	 * 角色名
+	 * role name
 	 * 
 	 */
 	@FieldMapperAnnotation(dbFieldName = "NAME", jdbcType = JdbcType.VARCHAR)
 	private String name;
 
 	/**
-	 * 角色值
+	 * role value
 	 * 
 	 */
 	@FieldMapperAnnotation(dbFieldName = "VALUE", jdbcType = JdbcType.VARCHAR)

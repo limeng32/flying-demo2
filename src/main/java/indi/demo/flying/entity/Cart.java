@@ -23,7 +23,7 @@ public class Cart implements Serializable {
 	private String id;
 
 	/**
-	 * 是否已交易成功
+	 * deal success?
 	 * 
 	 */
 	@FieldMapperAnnotation(dbFieldName = "DEAL", jdbcType = JdbcType.BOOLEAN)
@@ -37,9 +37,7 @@ public class Cart implements Serializable {
 	@JSONField(format = "yyyy-MM-dd hh:mm:ss")
 	private java.util.Date dealTime;
 
-	@FieldMapperAnnotation(dbFieldName = "PERSON_ID", jdbcType = JdbcType.VARCHAR)
-	private String personId;
-
+	@FieldMapperAnnotation(dbFieldName = "PERSON_ID", jdbcType = JdbcType.VARCHAR, dbAssociationUniqueKey = "ID")
 	private Person person;
 
 	public String getId() {
@@ -72,14 +70,6 @@ public class Cart implements Serializable {
 
 	public void setPerson(Person person) {
 		this.person = person;
-	}
-
-	public String getPersonId() {
-		return personId;
-	}
-
-	public void setPersonId(String personId) {
-		this.personId = personId;
 	}
 
 }

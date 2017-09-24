@@ -93,7 +93,7 @@ public class CacheTest {
 
 		Cart c1 = new Cart();
 		c1.setDeal(false);
-		c1.setPersonId(p1.getId());
+		c1.setPerson(p1);
 		cartService.myInsert(c1);
 
 		Cart cart = cartService.mySelect(c1.getId());
