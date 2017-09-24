@@ -26,7 +26,6 @@ import com.github.springtestdbunit.dataset.FlatXmlDataSetLoader;
 
 import indi.demo.flying.entity.Cart;
 import indi.demo.flying.entity2.Person;
-import indi.demo.flying.entity2.Role;
 import indi.demo.flying.service.CartService;
 import indi.demo.flying.service2.PersonService;
 import indi.demo.flying.service2.RoleService;
@@ -71,6 +70,12 @@ public class EntityTest4 {
 		p.setId("pp");
 		c.setPerson(p);
 		Cart cart = cartService.mySelectOne(c);
-		Assert.assertNotNull(dataSource2);
+
+		Cart cart2 = cartService.mySelect("aaa");
+		Assert.assertEquals("zhangsan", cart2.getPerson().getName());
+
+		Person p2 = new Person();
+		cart2.setPerson(p2);
+		cartService.myUpdate(cart2);
 	}
 }
