@@ -74,6 +74,8 @@ public class EntityTest4 {
 		Cart cart = cartService.mySelectOne(c);
 		Collection<Cart> cartC = cartService.mySelectAll(c);
 		Assert.assertEquals(1, cartC.size());
+		int i = cartService.myCount(c);
+		Assert.assertEquals(1, i);
 
 		Cart cart2 = cartService.mySelect("aaa");
 		Assert.assertEquals("zhangsan", cart2.getPerson().getName());
