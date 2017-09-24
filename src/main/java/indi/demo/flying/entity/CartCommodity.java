@@ -13,28 +13,28 @@ public class CartCommodity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Ö÷¼ü£¬ÒÔUUID·½Ê½±£´æ
+	 * ä¸»é”®ï¼Œä»¥UUIDæ–¹å¼ä¿å­˜
 	 * 
 	 */
 	@FieldMapperAnnotation(dbFieldName = "ID", jdbcType = JdbcType.VARCHAR, isUniqueKey = true)
 	private String id;
 
 	/**
-	 * ¹ØÁªµÄ¹ºÎï³µ
+	 * å¯¹åº”çš„è´­ç‰©è½¦
 	 * 
 	 */
 	@FieldMapperAnnotation(dbFieldName = "CART_ID", jdbcType = JdbcType.VARCHAR, dbAssociationUniqueKey = "ID")
 	private Cart cart;
 
 	/**
-	 * ¹ØÁªµÄÉÌÆ·
+	 * å¯¹åº”çš„å•†å“
 	 * 
 	 */
 	@FieldMapperAnnotation(dbFieldName = "COMM_ID", jdbcType = JdbcType.VARCHAR, dbAssociationUniqueKey = "ID")
 	private Commodity commodity;
 
 	/**
-	 * ´ËÖÖÉÌÆ·µÄÊıÁ¿
+	 * å•†å“çš„æ•°é‡
 	 * 
 	 */
 	@FieldMapperAnnotation(dbFieldName = "AMOUNT", jdbcType = JdbcType.INTEGER)

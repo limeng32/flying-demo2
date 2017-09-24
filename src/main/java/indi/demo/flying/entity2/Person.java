@@ -13,21 +13,21 @@ public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 主键，以UUID方式保存
+	 * 涓婚敭锛屼互UUID鏂瑰紡淇濆瓨
 	 * 
 	 */
 	@FieldMapperAnnotation(dbFieldName = "ID", jdbcType = JdbcType.VARCHAR, isUniqueKey = true)
 	private String id;
 
 	/**
-	 * 姓名
+	 * 濮撳悕
 	 * 
 	 */
 	@FieldMapperAnnotation(dbFieldName = "NAME", jdbcType = JdbcType.VARCHAR)
 	private String name;
 
 	/**
-	 * 关联的角色
+	 * 鍏宠仈瑙掕壊
 	 * 
 	 */
 	@FieldMapperAnnotation(dbFieldName = "ROLE_ID", jdbcType = JdbcType.VARCHAR, dbAssociationUniqueKey = "ID")
