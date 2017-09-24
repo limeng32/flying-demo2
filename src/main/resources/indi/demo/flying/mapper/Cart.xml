@@ -11,6 +11,10 @@
 		flying:selectAll
 	</select>
 
+	<select id="mySelectOne" resultMap="result">
+		flying:selectOne
+	</select>
+
 	<select id="myCount" resultType="int">
 		flying:count
 	</select>
@@ -39,6 +43,7 @@
 		<id property="id" column="ID" />
 		<result property="deal" column="DEAL" />
 		<result property="dealTime" column="DEAL_TIME" />
-		<result property="person" column="PERSON_ID" typeHandler="indi.demo.flying.typeHandler.PersonTypeHandler"/>
+		<result property="person" column="PERSON_ID"
+			typeHandler="indi.demo.flying.typeHandler.PersonTypeHandler" />
 	</resultMap>
 </mapper>

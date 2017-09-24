@@ -11,6 +11,10 @@
 		flying:selectAll
 	</select>
 
+	<select id="mySelectOne" resultMap="result">
+		flying:selectOne
+	</select>
+
 	<select id="myCount" resultType="int">
 		flying:count
 	</select>

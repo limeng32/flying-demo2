@@ -11,6 +11,10 @@
 		flying:selectAll
 	</select>
 
+	<select id="mySelectOne" resultMap="result">
+		flying:selectOne
+	</select>
+
 	<select id="myCount" resultType="int">
 		flying:count
 	</select>
@@ -27,12 +31,14 @@
 		flying:update
 	</update>
 
-	<update id="updateDirect" >
-		update ROLE set NAME = #{name} where ID = #{id}
+	<update id="updateDirect">
+		update ROLE set NAME = #{name} where
+		ID = #{id}
 	</update>
-	
-	<update id="updateDirectWithoutCache" >
-		update ROLE set NAME = #{name} where ID = #{id}
+
+	<update id="updateDirectWithoutCache">
+		update ROLE set NAME =
+		#{name} where ID = #{id}
 	</update>
 
 	<update id="myUpdatePersistent">
