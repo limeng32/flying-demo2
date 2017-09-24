@@ -75,7 +75,10 @@ public class EntityTest4 {
 		Assert.assertEquals("zhangsan", cart2.getPerson().getName());
 
 		Person p2 = new Person();
+		p2.setId("nnn");
 		cart2.setPerson(p2);
 		cartService.myUpdate(cart2);
+
+		cartService.myUpdatePersistent(cart2);
 	}
 }
