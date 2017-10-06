@@ -7,6 +7,8 @@ import java.sql.SQLException;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
+import org.apache.ibatis.type.MappedJdbcTypes;
+import org.apache.ibatis.type.MappedTypes;
 import org.apache.ibatis.type.TypeHandler;
 
 import indi.demo.flying.ApplicationContextProvider;
@@ -19,8 +21,7 @@ import indi.demo.flying.service2.PersonService;
  * @author limeng32
  * 
  */
-// @MappedTypes({ Person.class })
-// @MappedJdbcTypes({ JdbcType.VARCHAR })
+@MappedTypes({ Person.class })
 
 public class PersonTypeHandler extends BaseTypeHandler<Person> implements TypeHandler<Person> {
 
