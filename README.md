@@ -1,4 +1,4 @@
-# mybatis.flying 自动映射 pojo、跨库、缓存 的 demo2
+# mybatis.flying 自动映射 pojo 跨库并使用二级缓存 的 demo2
 
 How to play？
 
@@ -6,7 +6,7 @@ How to play？
 
 2、以 maven 命令执行 tomcat7:run
 
-3、以下是初始化时的添加的数据源dataSource和dataSource2，将商品业务数据和用户数据分开存放是一种常见做法。dataSource描述了两个购物车、12种商品和商品装入购物车的情况：
+3、以下是初始化时的添加的数据源 dataSource 和 dataSource2，将商品业务数据和用户数据分开存放是一种常见做法。dataSource 描述了两个购物车和 12 种商品和商品装入购物车的情况：
 ```
 <dataset>
 	<CART ID="1" DEAL="0" DEAL_TIME=null />
