@@ -35,7 +35,7 @@ How to play？
 	<CART_COMMODITY ID="8" CART_ID="2" COMM_ID="11" AMOUNT="1" />
 </dataset>
 ```
-dataSource2描述了3种会员级别和3位用户的情况：
+dataSource2 描述了 3 种会员级别和 3 位用户的情况：
 ```
 <dataset>
 	<ROLE ID="1" NAME="普通会员" VALUE="normal" />
@@ -71,8 +71,8 @@ dataSource2描述了3种会员级别和3位用户的情况：
 
 不刷新缓存的编辑会员级别：http://localhost:8080/flying-demo2/updateRoleDirectlyWithoutCache?id=${会员级别的id}&name=${会员级别的名称}
 
-以上方法的实现代码为： https://github.com/limeng32/flying-demo2/blob/master/src/main/java/indi/demo/flying/web/CommonController.java 
+以上方法的实现代码可见： https://github.com/limeng32/flying-demo2/blob/master/src/main/java/indi/demo/flying/web/CommonController.java 
 
 以上API方法除最后一个外，其余均使用了二级缓存。您可以调用 `updateRoleDirectlyWithoutCache` 修改会员级别名称，之后调用 `getRole` 能看到新的名称，但调用 `getCart` 和 `getCommodityByCart` 只能看到旧的名称，这是因为 `updateRoleDirectlyWithoutCache` 设计为不支持二级缓存，从这里可以看出缓存确实发挥了作用；如果您调用 `updateRoleDirectly` 修改会员级别名称，`getRole`、`getCart`和 `getCommodityByCart`都会显示出新的名称，因为 `updateRoleDirectly` 设计为支持二级缓存。
 
-最后，`updateRoleDirectly` 和 `updateRoleDirectlyWithoutCache` 都不是 flying 自动映射方法而是普通 mybatis 方法，这个例子也说明改造 mybatis 二级缓存的插件可供 flying 自动映射方法和非 flying 自动映射方法同时工作，如果再使用 redis 托管 mybatis 的二级缓存就成为可扩展的强大缓存解决方案，不过这已超过本例的讨论范围。
+最后，`updateRoleDirectly` 和 `updateRoleDirectlyWithoutCache` 都是普通 mybatis 方法而非 flying 自动映射方法，这个例子也说明改造 mybatis 二级缓存的插件可供 flying 自动映射方法和非 flying 自动映射方法同时工作，如果再使用 redis 托管 mybatis 的二级缓存，就成为了可扩展的缓存解决方案，不过这已超过本例的讨论范围。
