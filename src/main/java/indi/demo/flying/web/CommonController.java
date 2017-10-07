@@ -147,7 +147,7 @@ public class CommonController {
 		mm.addAttribute("_content", person);
 		return UNIQUE_VIEW_NAME;
 	}
-	
+
 	@RequestMapping(method = { RequestMethod.GET }, value = "/getCartCommodity")
 	public String getCartCommodity(HttpServletRequest request, HttpServletResponse response, ModelMap mm,
 			@RequestParam("id") String id) {
@@ -176,36 +176,6 @@ public class CommonController {
 		}
 		Role role = roleService.mySelect(id);
 		mm.addAttribute("_content", role);
-		return UNIQUE_VIEW_NAME;
-	}
-	
-	@RequestMapping(method = { RequestMethod.GET }, value = "/updateRole")
-	public String updateRole(HttpServletRequest request, HttpServletResponse response, ModelMap mm,
-			@RequestParam(value = "id", required = false) String id,
-			@RequestParam(value = "name", required = false) String name) {
-		if (id != null) {
-			Role r = new Role();
-			r.setId(id);
-			r.setName(name);
-			roleService.myUpdate(r);
-		}
-		Role role = roleService.mySelect(id);
-		mm.addAttribute("_content", role);
-		return UNIQUE_VIEW_NAME;
-	}
-	
-	@RequestMapping(method = { RequestMethod.GET }, value = "/updatePerson")
-	public String updatePerson(HttpServletRequest request, HttpServletResponse response, ModelMap mm,
-			@RequestParam(value = "id", required = false) String id,
-			@RequestParam(value = "name", required = false) String name) {
-		if (id != null) {
-			Person p = new Person();
-			p.setId(id);
-			p.setName(name);
-			personService.myUpdate(p);
-		}
-		Person person = personService.mySelect(id);
-		mm.addAttribute("_content", person);
 		return UNIQUE_VIEW_NAME;
 	}
 

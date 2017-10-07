@@ -67,8 +67,12 @@ dataSource2描述了3种会员级别和3位用户的情况：
 
 查看会员级别：		http://localhost:8080/flying-demo2/getRole?id=${会员级别的id}
 
-编辑会员级别：		
+编辑会员级别：		http://localhost:8080/flying-demo2/updateRoleDirectly?id=${会员级别的id}&name=${会员级别的名称}
+
+不刷新缓存的编辑会员级别：http://localhost:8080/flying-demo2/updateRoleDirectlyWithoutCache?id=${会员级别的id}&name=${会员级别的名称}
 
 以上方法的实现代码为： https://github.com/limeng32/flying-demo2/blob/master/src/main/java/indi/demo/flying/web/CommonController.java 
 
-如果 pojo 采用双向相关的方式构建可以写出更灵活强大的交互功能，不过这已超过本例的讨论范围。
+以上API方法除最后一个外，其余均使用了二级缓存。您可以调用 `updateRoleDirectlyWithoutCache` 修改会员级别名称，之后调用 `getRole` 能看到新的名称，但调用 `getCart` 和 `getCommodityByCart` 只能看到旧的名称，这是因为 `updateRoleDirectlyWithoutCache` 设计为不支持二级缓存，从这里可以看出缓存确实发挥了作用；如果您调用 `updateRoleDirectly` 修改会员级别名称，`getRole`、`getCart`和 `getCommodityByCart`都会显示出新的名称，因为 `updateRoleDirectly` 设计为支持二级缓存。
+
+最后，`updateRoleDirectly` 和 `updateRoleDirectlyWithoutCache` 都不是 flying 自动映射方法而是普通 mybatis 方法，这个例子也说明改造 mybatis 二级缓存的插件可供 flying 自动映射方法和非 flying 自动映射方法同时工作，如果再使用 redis 托管 mybatis 的二级缓存就成为可扩展的强大缓存解决方案，不过这已超过本例的讨论范围。
