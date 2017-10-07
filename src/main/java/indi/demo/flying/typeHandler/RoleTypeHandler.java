@@ -55,6 +55,9 @@ public class RoleTypeHandler extends BaseTypeHandler<Role> implements TypeHandle
 		}
 	}
 
+	/*
+	 * 因为此TypeHandler并非第一时间初始化，不能以@Autowired方式调用RoleService，所以采用下面的方式
+	 */
 	private RoleService getService() {
 		return (RoleService) ApplicationContextProvider.getApplicationContext().getBean(RoleService.class);
 	}

@@ -56,6 +56,9 @@ public class CommodityTypeHandler extends BaseTypeHandler<Commodity> implements 
 		}
 	}
 
+	/*
+	 * 因为此TypeHandler并非第一时间初始化，不能以@Autowired方式调用CommodityService，所以采用下面的方式
+	 */
 	private CommodityService getService() {
 		return (CommodityService) ApplicationContextProvider.getApplicationContext().getBean(CommodityService.class);
 	}

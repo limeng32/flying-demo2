@@ -55,6 +55,9 @@ public class CartTypeHandler extends BaseTypeHandler<Cart> implements TypeHandle
 		}
 	}
 
+	/*
+	 * 因为此TypeHandler并非第一时间初始化，不能以@Autowired方式调用CartService，所以采用下面的方式
+	 */
 	private CartService getService() {
 		return (CartService) ApplicationContextProvider.getApplicationContext().getBean(CartService.class);
 	}

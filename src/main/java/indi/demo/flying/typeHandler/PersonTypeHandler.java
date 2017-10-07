@@ -7,7 +7,6 @@ import java.sql.SQLException;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
-import org.apache.ibatis.type.MappedJdbcTypes;
 import org.apache.ibatis.type.MappedTypes;
 import org.apache.ibatis.type.TypeHandler;
 
@@ -56,6 +55,9 @@ public class PersonTypeHandler extends BaseTypeHandler<Person> implements TypeHa
 		}
 	}
 
+	/*
+	 * 因为此TypeHandler并非第一时间初始化，不能以@Autowired方式调用PersonService，所以采用下面的方式
+	 */
 	private PersonService getService() {
 		return (PersonService) ApplicationContextProvider.getApplicationContext().getBean(PersonService.class);
 	}
