@@ -54,13 +54,11 @@ public class CacheTest {
 	private RoleService roleService;
 
 	@Test
-	@IfProfileValue(name = "CACHE", value = "true")
 	public void testDataSource() {
 		Assert.assertNotNull(dataSource2);
 	}
 
 	@Test
-	@IfProfileValue(name = "CACHE", value = "true")
 	@ExpectedDatabases({
 			@ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED, value = "/indi/demo/flying/test/cacheTest/testCache.dataSource.result.xml", connection = "dataSource", override = false),
 			@ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED, value = "/indi/demo/flying/test/cacheTest/testCache.dataSource2.result.xml", connection = "dataSource2", override = false) })
