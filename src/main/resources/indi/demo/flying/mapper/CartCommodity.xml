@@ -41,9 +41,9 @@
 
 	<resultMap id="result" type="CartCommodity" autoMapping="true">
 		<id property="id" column="ID" />
-		<association property="cart" javaType="Cart"
-			select="indi.demo.flying.mapper.CartMapper.mySelect" column="CART_ID" />
-		<association property="commodity" javaType="Commodity"
-			select="indi.demo.flying.mapper.CommodityMapper.mySelect" column="COMM_ID" />
+		<result property="cart" column="CART_ID"
+			typeHandler="indi.demo.flying.typeHandler.CartTypeHandler" />
+		<result property="commodity" column="COMM_ID"
+			typeHandler="indi.demo.flying.typeHandler.CommodityTypeHandler" />
 	</resultMap>
 </mapper>

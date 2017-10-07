@@ -42,7 +42,7 @@
 	<resultMap id="result" type="Person" autoMapping="true">
 		<id property="id" column="ID" />
 		<result property="name" column="NAME" />
-		<association property="role" javaType="Role"
-			select="indi.demo.flying.mapper2.RoleMapper.mySelect" column="ROLE_ID" />
+		<result property="role" column="ROLE_ID"
+			typeHandler="indi.demo.flying.typeHandler.RoleTypeHandler" />
 	</resultMap>
 </mapper>
