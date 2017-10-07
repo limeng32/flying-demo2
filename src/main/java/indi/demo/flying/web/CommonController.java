@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import indi.demo.flying.condition.CartCommodityCondition;
 import indi.demo.flying.entity.Cart;
 import indi.demo.flying.entity.CartCommodity;
 import indi.demo.flying.entity.Commodity;
@@ -98,7 +99,7 @@ public class CommonController {
 			@RequestParam(value = "id", required = false) String cartId) {
 		Cart cartCondition = new Cart();
 		cartCondition.setId(cartId);
-		CartCommodity cartCommodityCondition = new CartCommodity();
+		CartCommodityCondition cartCommodityCondition = new CartCommodityCondition();
 		cartCommodityCondition.setCart(cartCondition);
 		Collection<CartCommodity> cartCommodityC = cartCommodityService.mySelectAll(cartCommodityCondition);
 		mm.addAttribute("_content", cartCommodityC);
@@ -146,6 +147,14 @@ public class CommonController {
 		mm.addAttribute("_content", person);
 		return UNIQUE_VIEW_NAME;
 	}
+	
+	@RequestMapping(method = { RequestMethod.GET }, value = "/getCartCommodity")
+	public String getCartCommodity(HttpServletRequest request, HttpServletResponse response, ModelMap mm,
+			@RequestParam("id") String id) {
+		CartCommodity c = cartCommodityService.mySelect(id);
+		mm.addAttribute("_content", c);
+		return UNIQUE_VIEW_NAME;
+	}
 
 	@RequestMapping(method = { RequestMethod.GET }, value = "/getRole")
 	public String getRole(HttpServletRequest request, HttpServletResponse response, ModelMap mm,
@@ -167,6 +176,36 @@ public class CommonController {
 		}
 		Role role = roleService.mySelect(id);
 		mm.addAttribute("_content", role);
+		return UNIQUE_VIEW_NAME;
+	}
+	
+	@RequestMapping(method = { RequestMethod.GET }, value = "/updateRole")
+	public String updateRole(HttpServletRequest request, HttpServletResponse response, ModelMap mm,
+			@RequestParam(value = "id", required = false) String id,
+			@RequestParam(value = "name", required = false) String name) {
+		if (id != null) {
+			Role r = new Role();
+			r.setId(id);
+			r.setName(name);
+			roleService.myUpdate(r);
+		}
+		Role role = roleService.mySelect(id);
+		mm.addAttribute("_content", role);
+		return UNIQUE_VIEW_NAME;
+	}
+	
+	@RequestMapping(method = { RequestMethod.GET }, value = "/updatePerson")
+	public String updatePerson(HttpServletRequest request, HttpServletResponse response, ModelMap mm,
+			@RequestParam(value = "id", required = false) String id,
+			@RequestParam(value = "name", required = false) String name) {
+		if (id != null) {
+			Person p = new Person();
+			p.setId(id);
+			p.setName(name);
+			personService.myUpdate(p);
+		}
+		Person person = personService.mySelect(id);
+		mm.addAttribute("_content", person);
 		return UNIQUE_VIEW_NAME;
 	}
 

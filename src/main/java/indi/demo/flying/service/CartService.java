@@ -16,20 +16,17 @@ public class CartService implements CartMapper {
 
 	@Override
 	public Cart mySelect(Object id) {
-		Cart ret = mapper.mySelect(id);
-		return ret;
+		return mapper.mySelect(id);
 	}
 
 	@Override
 	public Collection<Cart> mySelectAll(Cart t) {
-		Collection<Cart> ret = mapper.mySelectAll(t);
-		return ret;
+		return mapper.mySelectAll(t);
 	}
 
 	@Override
 	public Cart mySelectOne(Cart t) {
-		Cart ret = mapper.mySelectOne(t);
-		return ret;
+		return mapper.mySelectOne(t);
 	}
 
 	@Override
