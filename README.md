@@ -77,4 +77,6 @@ dataSource2 描述了 3 种会员级别和 3 位用户的情况：
 
 以上API方法除最后一个外，其余均支持了二级缓存。您可以调用 `updateRoleDirectlyWithoutCache` 修改会员级别名称，之后调用 `getRole` 能看到新的名称，但调用 `getCart` 和 `getCommodityByCart` 则只能看到修改前的名称，这是因为 `updateRoleDirectlyWithoutCache` 设计为不支持二级缓存，从这里可以看出缓存确实发挥了作用；如果您调用 `updateRoleDirectly` 修改会员级别名称，在调用 `getRole`、`getCart`和 `getCommodityByCart` 都会显示出新的名称，因为 `updateRoleDirectly` 设计为支持二级缓存。如果再使用 redis 托管 mybatis 的二级缓存，就成为了可扩展的缓存解决方案，不过这已超过本例的讨论范围。
 
-最后，`updateRoleDirectly` 和 `updateRoleDirectlyWithoutCache` 都是普通 mybatis 方法而非 flying 自动映射方法，这个例子也说明改造 mybatis 二级缓存的插件可供 flying 自动映射方法和非 flying 自动映射方法同时工作。
+`updateRoleDirectly` 和 `updateRoleDirectlyWithoutCache` 都是普通 mybatis 方法而非 flying 自动映射方法，这个例子也说明改造 mybatis 二级缓存的插件可供 flying 自动映射方法和非 flying 自动映射方法同时工作。
+
+最后，flying 项目介绍请见 [flying-doc.limeng32.com](http://flying-doc.limeng32.com) ，我们为开发最好的 mybatis 插件而努力。
