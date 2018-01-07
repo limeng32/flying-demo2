@@ -9,8 +9,8 @@ How to play？
 3、以下是初始化时的添加的数据源 dataSource 和 dataSource2，将商品业务数据和用户数据分开存放是一种常见做法。dataSource 描述了两个购物车和 12 种商品和商品装入购物车的情况：
 ```
 <dataset>
-	<CART ID="1" DEAL="0" DEAL_TIME=null />
-	<CART ID="2" DEAL="0" DEAL_TIME=null />
+	<CART ID="1" DEAL="0" DEAL_TIME=null PERSON_ID="1"/>
+	<CART ID="2" DEAL="0" DEAL_TIME=null PERSON_ID="2" />
 	
 	<COMMODITY ID="1" NAME="牙刷A" PRICE="1200" />
 	<COMMODITY ID="2" NAME="牙刷B" PRICE="1850" />
