@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import indi.demo.flying.condition.CartCommodityCondition;
+import indi.demo.flying.condition.CartCondition;
 import indi.demo.flying.condition.CommodityCondition;
 import indi.demo.flying.entity.Cart;
 import indi.demo.flying.entity.CartCommodity;
@@ -231,6 +232,16 @@ public class CommonController {
 		}
 		Role role = roleService.mySelect(id);
 		mm.addAttribute("_content", role);
+		return UNIQUE_VIEW_NAME;
+	}
+
+	@RequestMapping(method = { RequestMethod.GET }, value = "/getCartOr")
+	public String getCartOr(HttpServletRequest request, HttpServletResponse response, ModelMap mm,
+			@RequestParam("id") String id) {
+		CartCondition cartCondition = new CartCondition();
+		cartCondition.setIdOr("1", "2");
+		Collection<Cart> cartC = cartService.mySelectAll(cartCondition);
+		mm.addAttribute("_content", cartC);
 		return UNIQUE_VIEW_NAME;
 	}
 }
