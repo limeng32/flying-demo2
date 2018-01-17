@@ -48,16 +48,36 @@ public class CartCommodity implements Serializable {
 		return cart;
 	}
 
-	public void setCart(Cart cart) {
-		this.cart = cart;
+	public void setCart(Cart newCart) {
+		if (this.cart == null || !this.cart.equals(newCart)) {
+			if (this.cart != null) {
+				Cart oldCart = this.cart;
+				this.cart = null;
+				oldCart.removeCartCommodity(this);
+			}
+			if (newCart != null) {
+				this.cart = newCart;
+				this.cart.addCartCommodity(this);
+			}
+		}
 	}
 
 	public Commodity getCommodity() {
 		return commodity;
 	}
 
-	public void setCommodity(Commodity commodity) {
-		this.commodity = commodity;
+	public void setCommodity(Commodity newCommodity) {
+		if (this.commodity == null || !this.commodity.equals(newCommodity)) {
+			if (this.commodity != null) {
+				Commodity oldCommodity = this.commodity;
+				this.commodity = null;
+				oldCommodity.removeCartCommodity(this);
+			}
+			if (newCommodity != null) {
+				this.commodity = newCommodity;
+				this.commodity.addCartCommodity(this);
+			}
+		}
 	}
 
 	public Integer getAmount() {
