@@ -1,5 +1,5 @@
 package indi.demo.flying.entity2;
 
 public enum RoleEnum {
-	/* ÆÕÍ¨ÓÃ»§ */normal, /* ÒøÅÆÓÃ»§ */silver, /* ½ğÅÆÓÃ»§ */gold
+	/* æ™®é€šç”¨æˆ· */normal, /* é“¶ç‰Œç”¨æˆ· */silver, /* é‡‘ç‰Œç”¨æˆ· */gold
 }

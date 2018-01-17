@@ -16,13 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import indi.demo.flying.condition.CartCommodityCondition;
-import indi.demo.flying.condition.CartCondition;
 import indi.demo.flying.condition.CommodityCondition;
+import indi.demo.flying.condition.RoleCondition;
 import indi.demo.flying.entity.Cart;
 import indi.demo.flying.entity.CartCommodity;
 import indi.demo.flying.entity.Commodity;
 import indi.demo.flying.entity2.Person;
 import indi.demo.flying.entity2.Role;
+import indi.demo.flying.entity2.RoleEnum;
 import indi.demo.flying.service.CartCommodityService;
 import indi.demo.flying.service.CartService;
 import indi.demo.flying.service.CommodityService;
@@ -235,13 +236,13 @@ public class CommonController {
 		return UNIQUE_VIEW_NAME;
 	}
 
-	@RequestMapping(method = { RequestMethod.GET }, value = "/getCartOr")
+	@RequestMapping(method = { RequestMethod.GET }, value = "/getRoleOr")
 	public String getCartOr(HttpServletRequest request, HttpServletResponse response, ModelMap mm,
-			@RequestParam("id") String id) {
-		CartCondition cartCondition = new CartCondition();
-		cartCondition.setIdOr("1", "2");
-		Collection<Cart> cartC = cartService.mySelectAll(cartCondition);
-		mm.addAttribute("_content", cartC);
+			@RequestParam(value = "value1") RoleEnum value1, @RequestParam(value = "value2") RoleEnum value2) {
+		RoleCondition roleCondition = new RoleCondition();
+		roleCondition.setValueOr(value1, value2);
+		Collection<Role> roleC = roleService.mySelectAll(roleCondition);
+		mm.addAttribute("_content", roleC);
 		return UNIQUE_VIEW_NAME;
 	}
 }
