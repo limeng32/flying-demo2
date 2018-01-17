@@ -33,4 +33,6 @@ public interface PersonMapper {
 
 	@CacheAnnotation(role = CacheRoleType.Observer)
 	public int myCount(Person t);
+
+	public void loadRole(Role role, Person person);
 }

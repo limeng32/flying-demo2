@@ -5,7 +5,9 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import indi.demo.flying.entity.Cart;
 import indi.demo.flying.entity.CartCommodity;
+import indi.demo.flying.entity.Commodity;
 import indi.demo.flying.mapper.CartCommodityMapper;
 
 @Service
@@ -52,6 +54,20 @@ public class CartCommodityService implements CartCommodityMapper {
 	@Override
 	public int myCount(CartCommodity t) {
 		return mapper.myCount(t);
+	}
+
+	@Override
+	public void loadCommodity(Commodity commodity, CartCommodity cartCommodity) {
+		commodity.removeAllCartCommodity();
+		cartCommodity.setCommodity(commodity);
+		commodity.setCartCommodity(mapper.mySelectAll(cartCommodity));
+	}
+
+	@Override
+	public void loadCart(Cart cart, CartCommodity cartCommodity) {
+		cart.removeAllCartCommodity();
+		cartCommodity.setCart(cart);
+		cart.setCartCommodity(mapper.mySelectAll(cartCommodity));
 	}
 
 }

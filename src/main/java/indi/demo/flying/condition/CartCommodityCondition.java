@@ -3,16 +3,14 @@ package indi.demo.flying.condition;
 import java.io.Serializable;
 
 import indi.demo.flying.entity.CartCommodity;
-import indi.mybatis.flying.annotations.QueryMapperAnnotation;
 import indi.mybatis.flying.models.Conditionable;
 import indi.mybatis.flying.models.Limitable;
 import indi.mybatis.flying.models.Sortable;
 
-@QueryMapperAnnotation(tableName = "CART_COMMODITY")
-public class CartCommodityCondition extends CartCommodity implements Conditionable,Serializable {
+public class CartCommodityCondition extends CartCommodity implements Conditionable, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Limitable limiter;
 
 	private Sortable sorter;

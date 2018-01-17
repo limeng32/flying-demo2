@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import indi.demo.flying.condition.CartCommodityCondition;
 import indi.demo.flying.condition.CommodityCondition;
 import indi.demo.flying.condition.RoleCondition;
 import indi.demo.flying.entity.Cart;
@@ -139,12 +138,9 @@ public class CommonController {
 	@RequestMapping(method = { RequestMethod.GET }, value = "/getCommodityByCart")
 	public String getCommodityByCart(HttpServletRequest request, HttpServletResponse response, ModelMap mm,
 			@RequestParam(value = "id", required = false) String cartId) {
-		Cart cartCondition = new Cart();
-		cartCondition.setId(cartId);
-		CartCommodityCondition cartCommodityCondition = new CartCommodityCondition();
-		cartCommodityCondition.setCart(cartCondition);
-		Collection<CartCommodity> cartCommodityC = cartCommodityService.mySelectAll(cartCommodityCondition);
-		mm.addAttribute("_content", cartCommodityC);
+		Cart cart = cartService.mySelect(cartId);
+		cartCommodityService.loadCart(cart, new CartCommodity());
+		mm.addAttribute("_content", cart.getCartCommodity());
 		return UNIQUE_VIEW_NAME;
 	}
 
@@ -236,13 +232,25 @@ public class CommonController {
 		return UNIQUE_VIEW_NAME;
 	}
 
-	@RequestMapping(method = { RequestMethod.GET }, value = "/getRoleOr")
-	public String getCartOr(HttpServletRequest request, HttpServletResponse response, ModelMap mm,
+	@RequestMapping(method = { RequestMethod.GET }, value = "/getRoleValue1OrValue2")
+	public String getRoleValue1OrValue2(HttpServletRequest request, HttpServletResponse response, ModelMap mm,
 			@RequestParam(value = "value1") RoleEnum value1, @RequestParam(value = "value2") RoleEnum value2) {
 		RoleCondition roleCondition = new RoleCondition();
-		roleCondition.setValueOr(value1, value2);
+		roleCondition.setValue1OrValue2(value1, value2);
 		Collection<Role> roleC = roleService.mySelectAll(roleCondition);
 		mm.addAttribute("_content", roleC);
+		return UNIQUE_VIEW_NAME;
+	}
+
+	@RequestMapping(method = { RequestMethod.GET }, value = "/getRoleValueOrPersonName")
+	public String getRoleValueOrPersonName(HttpServletRequest request, HttpServletResponse response, ModelMap mm,
+			@RequestParam(value = "value") RoleEnum value, @RequestParam(value = "name") String name) {
+		RoleCondition roleCondition = new RoleCondition();
+		roleCondition.setValueOrPersonName(value, name);
+		Person p = new Person();
+		p.setRole(roleCondition);
+		Collection<Person> personC = personService.mySelectAll(p);
+		mm.addAttribute("_content", personC);
 		return UNIQUE_VIEW_NAME;
 	}
 }

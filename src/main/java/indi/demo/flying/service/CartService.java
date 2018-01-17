@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import indi.demo.flying.entity.Cart;
+import indi.demo.flying.entity2.Person;
 import indi.demo.flying.mapper.CartMapper;
 
 @Service
@@ -52,6 +53,13 @@ public class CartService implements CartMapper {
 	@Override
 	public int myCount(Cart t) {
 		return mapper.myCount(t);
+	}
+
+	@Override
+	public void loadPerson(Person person, Cart cart) {
+		person.removeAllCart();
+		cart.setPerson(person);
+		person.setCart(mapper.mySelectAll(cart));
 	}
 
 }

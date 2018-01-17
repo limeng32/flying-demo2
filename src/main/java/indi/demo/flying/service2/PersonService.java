@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import indi.demo.flying.entity2.Person;
+import indi.demo.flying.entity2.Role;
 import indi.demo.flying.mapper2.PersonMapper;
 
 @Service
@@ -56,6 +57,13 @@ public class PersonService implements PersonMapper {
 	
 	public PersonMapper m(){
 		return mapper;
+	}
+
+	@Override
+	public void loadRole(Role role, Person person) {
+		role.removeAllPerson();
+		person.setRole(role);
+		role.setPerson(mapper.mySelectAll(person));
 	}
 
 }

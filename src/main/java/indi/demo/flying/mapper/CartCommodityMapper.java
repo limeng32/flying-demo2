@@ -34,4 +34,8 @@ public interface CartCommodityMapper {
 
 	@CacheAnnotation(role = CacheRoleType.Observer)
 	public int myCount(CartCommodity t);
+
+	public void loadCommodity(Commodity commodity, CartCommodity cartCommodity);
+
+	public void loadCart(Cart cart, CartCommodity cartCommodity);
 }

@@ -38,14 +38,26 @@ public class RoleCondition extends Role implements Conditionable {
 
 	@Or({ @ConditionMapperAnnotation(dbFieldName = "VALUE", conditionType = ConditionType.Equal),
 			@ConditionMapperAnnotation(dbFieldName = "VALUE", conditionType = ConditionType.Equal) })
-	private Object[] valueOr;
+	private Object[] value1OrValue2;
 
-	public Object[] getValueOr() {
-		return valueOr;
+	@Or({ @ConditionMapperAnnotation(dbFieldName = "VALUE", conditionType = ConditionType.Equal),
+			@ConditionMapperAnnotation(dbFieldName = "NAME", conditionType = ConditionType.Equal, subTarget = indi.demo.flying.entity2.Person.class) })
+	private Object[] valueOrPersonName;
+
+	public Object[] getValue1OrValue2() {
+		return value1OrValue2;
 	}
 
-	public void setValueOr(Object... valueOr) {
-		this.valueOr = valueOr;
+	public void setValue1OrValue2(Object... value1OrValue2) {
+		this.value1OrValue2 = value1OrValue2;
+	}
+
+	public Object[] getValueOrPersonName() {
+		return valueOrPersonName;
+	}
+
+	public void setValueOrPersonName(Object... valueOrPersonName) {
+		this.valueOrPersonName = valueOrPersonName;
 	}
 
 }
