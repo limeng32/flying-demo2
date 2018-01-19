@@ -19,12 +19,9 @@
 		flying:count
 	</select>
 
-	<!-- 此处调用数据库原生的获取uuid的方法，在h2_base模拟mysql情况下为RANDOM_UUID()方法，在真实mysql情况下为UUID()方法 -->
+	<!-- 采用 flying 内置的 “无横线的uuid” 生成器，其余内置属性可参见 indi.mybatis.flying.statics.KeyGeneratorType -->
 	<insert id="myInsert">
-		flying:insert
-		<selectKey keyProperty="id" resultType="String" order="BEFORE">
-			select replace(RANDOM_UUID(), '-', '')
-		</selectKey>
+		flying:insert(uuid_no_line)
 	</insert>
 
 	<update id="myUpdate">
