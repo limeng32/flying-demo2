@@ -40,12 +40,24 @@ public class CartCondition extends Cart implements Conditionable {
 			@ConditionMapperAnnotation(dbFieldName = "ID", conditionType = ConditionType.Equal) })
 	private Object[] idOr;
 
+	@Or({ @ConditionMapperAnnotation(dbFieldName = "ID", conditionType = ConditionType.Equal, dbAssociationTypeHandler = indi.demo.flying.typeHandler.PersonTypeHandler.class),
+			@ConditionMapperAnnotation(dbFieldName = "ID", conditionType = ConditionType.Equal, dbAssociationTypeHandler = indi.demo.flying.typeHandler.PersonTypeHandler.class) })
+	private Object[] personIdOr;
+
 	public Object[] getIdOr() {
 		return idOr;
 	}
 
 	public void setIdOr(Object... idOr) {
 		this.idOr = idOr;
+	}
+
+	public Object[] getPersonIdOr() {
+		return personIdOr;
+	}
+
+	public void setPersonIdOr(Object... personIdOr) {
+		this.personIdOr = personIdOr;
 	}
 
 }

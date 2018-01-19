@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import indi.demo.flying.condition.CartCondition;
 import indi.demo.flying.condition.CommodityCondition;
 import indi.demo.flying.condition.RoleCondition;
 import indi.demo.flying.entity.Cart;
@@ -251,6 +252,75 @@ public class CommonController {
 		p.setRole(roleCondition);
 		Collection<Person> personC = personService.mySelectAll(p);
 		mm.addAttribute("_content", personC);
+		return UNIQUE_VIEW_NAME;
+	}
+
+	/* 向当前购物车加入/删除商品（amount为负数时为删除），会自动和购物车中的同种商品进行合并操作，若最终数量为负数则等于零 */
+	/* 此用例用来展示双向相关算法下处理业务模型的优雅之处 */
+	@RequestMapping(method = { RequestMethod.GET }, value = "/addCommodityToCart")
+	public String addCommodityToCart(HttpServletRequest request, HttpServletResponse response, ModelMap mm,
+			@RequestParam(value = "cartId") String cartId, @RequestParam(value = "commId") String commId,
+			@RequestParam(value = "amount") Integer amount) {
+		Cart cart = cartService.mySelect(cartId);
+		if (cart == null) {
+			/* 如果cart不存在则返回null */
+			return UNIQUE_VIEW_NAME;
+		}
+
+		Commodity commodity = commodityService.mySelect(commId);
+		if (commodity != null) {
+			/* 先查询购物车中是否有同种商品 */
+			CartCommodity cc = new CartCommodity();
+			cc.setCart(cart);
+			cc.setCommodity(commodity);
+
+			CartCommodity cartCommodity = cartCommodityService.mySelectOne(cc);
+
+			if (cartCommodity == null) {
+				/* 如果购物车中没有此项商品，且数量大于0，则增加此项 */
+				cartCommodity = new CartCommodity();
+				cartCommodity.setCart(cart);
+				cartCommodity.setCommodity(commodity);
+				cartCommodity.setAmount(amount);
+				if (cartCommodity.getAmount() > 0) {
+					cartCommodityService.myInsert(cartCommodity);
+				}
+			} else {
+				/* 如果购物车中有此项商品，如果最终数量大于0则更新此项，如果最终数量小于等于0则删除此项 */
+				cartCommodity.setCart(cart);
+				cartCommodity.setCommodity(commodity);
+				cartCommodity.setAmount((cartCommodity.getAmount() == null ? 0 : cartCommodity.getAmount()) + amount);
+				if (cartCommodity.getAmount() > 0) {
+					cartCommodityService.myUpdate(cartCommodity);
+				} else {
+					cartCommodityService.myDelete(cartCommodity);
+				}
+			}
+		}
+		/* 最后重新查询购物车中的内容 */
+		cartCommodityService.loadCart(cart, new CartCommodity());
+		mm.addAttribute("_content", cart.getCartCommodity());
+		return UNIQUE_VIEW_NAME;
+	}
+
+	/* 采用或逻辑的按人员查询商品详情，可选择两个人员 id */
+	/* 此用例展示 flying 如何处理跨库或逻辑 */
+	@RequestMapping(method = { RequestMethod.GET }, value = "/getCartCommodityByPersonId1OrId2")
+	public String getCartCommodityByPersonId1OrId2(HttpServletRequest request, HttpServletResponse response,
+			ModelMap mm, @RequestParam(value = "id1") String id1, @RequestParam(value = "id2") String id2) {
+		CartCondition cartCondition = new CartCondition();
+		Person p1 = new Person();
+		p1.setId(id1);
+		Person p2 = new Person();
+		p2.setId(id2);
+		cartCondition.setPersonIdOr(p1, p2);
+		Collection<Cart> cartC = cartService.mySelectAll(cartCondition);
+		if (cartC != null) {
+			for (Cart cart : cartC) {
+				cartCommodityService.loadCart(cart, new CartCommodity());
+			}
+			mm.addAttribute("_content", cartC);
+		}
 		return UNIQUE_VIEW_NAME;
 	}
 }
