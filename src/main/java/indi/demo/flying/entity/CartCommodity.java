@@ -21,7 +21,7 @@ public class CartCommodity implements Serializable {
 	 */
 	@Id
 	@Column(name = "ID")
-	private String id;
+	private Long id;
 
 	/**
 	 * 对应的购物车
@@ -88,11 +88,11 @@ public class CartCommodity implements Serializable {
 		this.amount = amount;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

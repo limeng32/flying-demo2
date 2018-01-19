@@ -73,7 +73,7 @@ public class EntityTest {
 	@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = "/indi/demo/flying/test/entityTest/testCommodity.result.xml")
 	public void testCommodity() {
 		Commodity commodity = commodityService.mySelect("mmm");
-		Assert.assertEquals("—¿À¢", commodity.getName());
+		Assert.assertEquals("ya_shua", commodity.getName());
 		commodity.setPrice(1500);
 		commodityService.myUpdate(commodity);
 
@@ -87,8 +87,8 @@ public class EntityTest {
 	@ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED, value = "/indi/demo/flying/test/entityTest/testCartCommodity.result.xml")
 	@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = "/indi/demo/flying/test/entityTest/testCartCommodity.result.xml")
 	public void testCartCommodity() {
-		CartCommodity cartCommodity = cartCommodityService.mySelect("w");
-		Assert.assertEquals("—¿À¢", cartCommodity.getCommodity().getName());
+		CartCommodity cartCommodity = cartCommodityService.mySelect(100000000000001l);
+		Assert.assertEquals("ya_shua", cartCommodity.getCommodity().getName());
 
 		Commodity comm2 = commodityService.mySelect("ooo");
 		cartCommodity.setCommodity(comm2);
