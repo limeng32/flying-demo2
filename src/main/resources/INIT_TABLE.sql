@@ -65,7 +65,7 @@ values ('12', '浴液-4000ML', '4900');
 
 create table CART_COMMODITY
 (
-   ID         			varchar(40) not null ,
+   ID         			bigint not null ,
    CART_ID              varchar(40) ,
    COMM_ID				varchar(40) ,
    AMOUNT            	integer ,
