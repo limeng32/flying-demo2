@@ -1,5 +1,6 @@
 package indi.demo.flying.test;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,7 +10,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.IfProfileValue;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -93,12 +93,6 @@ public class CacheTest {
 		c1.setDeal(false);
 		c1.setPerson(p1);
 		cartService.myInsert(c1);
-		
-//		Person p_ = new Person();
-//		p_.setId(p1.getId());
-//		Cart cc = new Cart();
-//		cc.setPerson(p_);
-//		Cart c_ = cartService.mySelectOne(cc);
 
 		Cart cart = cartService.mySelect(c1.getId());
 		Assert.assertEquals("normal", cart.getPerson().getRole().getName());
@@ -118,5 +112,57 @@ public class CacheTest {
 
 		cart = cartService.mySelect(c1.getId());
 		Assert.assertEquals("normal2", cart.getPerson().getRole().getName());
+	}
+
+	@Test
+	@ExpectedDatabases({
+			@ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED, value = "/indi/demo/flying/test/cacheTest/testCache2.dataSource.result.xml", connection = "dataSource", override = false),
+			@ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED, value = "/indi/demo/flying/test/cacheTest/testCache2.dataSource2.result.xml", connection = "dataSource2", override = false) })
+	@DatabaseTearDowns({
+			@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = "/indi/demo/flying/test/cacheTest/testCache2.dataSource.result.xml", connection = "dataSource"),
+			@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = "/indi/demo/flying/test/cacheTest/testCache2.dataSource2.result.xml", connection = "dataSource2"), })
+	public void testCache2() {
+		Role r1 = new Role(), r2 = new Role(), r3 = new Role();
+		r1.setName("normal");
+		r1.setValue(RoleEnum.normal);
+		roleService.myInsert(r1);
+
+		r2.setName("silver");
+		r2.setValue(RoleEnum.silver);
+		roleService.myInsert(r2);
+
+		r3.setName("gold");
+		r3.setValue(RoleEnum.gold);
+		roleService.myInsert(r3);
+
+		Person p1 = new Person(), p2 = new Person();
+		p1.setName("zhangsan");
+		p1.setRole(r1);
+		personService.myInsert(p1);
+
+		p2.setName("lisi");
+		p2.setRole(r2);
+		personService.myInsert(p2);
+
+		Cart c1 = new Cart();
+		c1.setDeal(false);
+		c1.setPerson(p1);
+		cartService.myInsert(c1);
+
+		Cart c2 = new Cart();
+		c2.setDeal(true);
+		c2.setPerson(p2);
+		cartService.myInsert(c2);
+
+		Cart c3 = new Cart();
+		c3.setDeal(true);
+		c3.setPerson(p2);
+		cartService.myInsert(c3);
+
+		Cart cart = cartService.mySelect(c1.getId());
+		Assert.assertEquals("normal", cart.getPerson().getRole().getName());
+
+		Collection<Cart> carts = cartService.mySelectAll(new Cart());
+		Assert.assertEquals(3, carts.size());
 	}
 }
