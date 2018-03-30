@@ -54,11 +54,11 @@ public class EntityTest2 {
 	@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = "/indi/demo/flying/test/entityTest2/testRole.result.xml", connection = "dataSource2")
 	public void testRole() {
 		Role role = roleService.mySelect("aaa");
-		Assert.assertEquals("ÆÕÍ¨»áÔ±", role.getName());
+		Assert.assertEquals("æ™®é€šä¼šå‘˜", role.getName());
 
 		Role role2 = roleService.mySelect("bbb");
 		role2.setValue(RoleEnum.silver);
-		role2.setName("ÒøÅÆ»áÔ±");
+		role2.setName("é“¶ç‰Œä¼šå‘˜");
 		roleService.myUpdate(role2);
 	}
 
@@ -68,7 +68,7 @@ public class EntityTest2 {
 	@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = "/indi/demo/flying/test/entityTest2/testPerson.result.xml", connection = "dataSource2")
 	public void testPerson() {
 		Person person = personService.mySelect("mmm");
-		Assert.assertEquals("ÕÅÈý", person.getName());
+		Assert.assertEquals("å¼ ä¸‰", person.getName());
 		Assert.assertEquals(RoleEnum.normal, person.getRole().getValue());
 
 		Person person2 = personService.mySelect("nnn");

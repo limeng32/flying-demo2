@@ -113,6 +113,16 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>${javax.persistence.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson.version}</version>
+		</dependency>
 	</dependencies>
 	<properties>
 		<flying.version>0.9.3</flying.version>
@@ -128,6 +138,8 @@
 		<cglib-nodep.version>2.2.2</cglib-nodep.version>
 		<servlet.version>3.0.1</servlet.version>
 		<junit.version>4.12</junit.version>
+		<javax.persistence.version>1.0</javax.persistence.version>
+		<fastjson.version>1.2.38</fastjson.version>
 	</properties>
 	<build>
 		<finalName>flying-demo2</finalName>
@@ -148,6 +160,16 @@
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>2.6</version>
 				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.0</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
