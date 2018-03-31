@@ -1,8 +1,0 @@
-<dataset>
-	<PERSON ID="mmm" NAME="zhangsan" ROLE_ID="aaa" />
-	<PERSON ID="nnn" NAME="lisi" ROLE_ID="bbb" />
-
-	<ROLE ID="aaa" NAME="normal" VALUE="normal" />
-	<ROLE ID="bbb" NAME="silver" VALUE="silver" />
-	<ROLE ID="ccc" NAME="gold" VALUE="gold" />
-</dataset>

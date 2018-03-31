@@ -11,36 +11,38 @@
         http://www.springframework.org/schema/context/spring-context-3.2.xsd  
        	http://www.springframework.org/schema/aop
        	http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
-       	http://www.springframework.org/schema/tx
-       	http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
        	http://www.springframework.org/schema/jdbc
-       	http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd">
+       	http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+       	http://www.springframework.org/schema/tx
+       	http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 
 	<context:component-scan base-package="indi.demo.flying.*" />
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="configLocation" value="classpath:Configuration.xml" />
-		<property name="dataSource" ref="dataSource" />
-		<property name="mapperLocations" value="classpath*:indi/demo/flying/mapper/*.xml" />
+		<property name="dataSource" ref="dataSource1" />
+		<property name="mapperLocations" value="classpath*:indi/demo/flying/mapper*/*.xml" />
 		<property name="typeAliasesPackage" value="indi.demo.flying" />
 	</bean>
-
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="indi.demo.flying.mapper" />
-		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-	</bean>
-
 	<bean id="sqlSessionFactory2" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="configLocation" value="classpath:Configuration.xml" />
 		<property name="dataSource" ref="dataSource2" />
-		<property name="mapperLocations" value="classpath*:indi/demo/flying/mapper2/*.xml" />
+		<property name="mapperLocations" value="classpath*:indi/demo/flying/mapper*/*.xml" />
 		<property name="typeAliasesPackage" value="indi.demo.flying" />
 	</bean>
-
+	<bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="indi.demo.flying.mapper" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
 	<bean id="mapperScannerConfigurer2" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="indi.demo.flying.mapper2" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory2" />
 	</bean>
 
-	<bean id="applicationContextProvder" class="indi.demo.flying.ApplicationContextProvider" />
+	<!-- <bean id="distributedSnowflakeKeyGenerator" class="indi.mybatis.flying.keyHandler.DistributedSnowflakeKeyGenerator"> 
+		<property name="workerId" value="5" /> <property name="datacenterId" value="5" 
+		/> </bean> -->
+
+	<bean id="applicationContextProvder" class="indi.mybatis.flying.ApplicationContextProvider" />
+
 </beans>
