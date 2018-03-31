@@ -33,9 +33,8 @@
 		p:prefix="/" p:suffix=".jsp">
 	</bean>
 
-	<bean
-		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-		<property name="order" value="0" />
+	<bean id="contentNegotiationManager"
+		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
 		<property name="defaultContentType" value="application/json" />
 		<property name="ignoreAcceptHeader" value="true" />
 		<property name="favorPathExtension" value="false" />
@@ -48,6 +47,10 @@
 				<entry key="json" value="application/json" />
 			</map>
 		</property>
+	</bean>
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="contentNegotiationManager" ref="contentNegotiationManager" />
 		<property name="defaultViews">
 			<list>
 				<bean class="com.alibaba.fastjson.support.spring.FastJsonJsonView">
