@@ -44,7 +44,7 @@
 		<id property="id" column="_ID" />
 		<result property="name" column="NAME" />
 		<association property="role" javaType="Role"
-			select="indi.demo.flying.mapper2.Role_Mapper.mySelectWithoutCache"
+			select="indi.demo.flying.mapper2.RoleMapper.mySelectWithoutCache"
 			column="ROLE_ID" />
 	</resultMap>
 </mapper>

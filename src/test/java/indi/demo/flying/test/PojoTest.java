@@ -34,7 +34,7 @@ import indi.demo.flying.service.CartCommodityService;
 import indi.demo.flying.service.CartService;
 import indi.demo.flying.service.CommodityService;
 import indi.demo.flying.service2.PersonService;
-import indi.demo.flying.service2.Role_Service;
+import indi.demo.flying.service2.RoleService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class,
@@ -59,7 +59,7 @@ public class PojoTest {
 	private PersonService personService;
 
 	@Autowired
-	private Role_Service role_Service;
+	private RoleService roleService;
 
 	@Test
 	public void test() {
@@ -88,13 +88,13 @@ public class PojoTest {
 	@ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED, value = "/indi/demo/flying/test/pojoTest/testRole.result.xml", connection = "dataSource2", override = false)
 	@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = "/indi/demo/flying/test/pojoTest/testRole.result.xml", connection = "dataSource2")
 	public void testRole() {
-		Role role = role_Service.mySelect("aaa");
+		Role role = roleService.mySelect("aaa");
 		Assert.assertEquals("普通会员", role.getName());
 
-		Role role2 = role_Service.mySelect("bbb");
+		Role role2 = roleService.mySelect("bbb");
 		role2.setName("银牌会员");
 		role2.setValue(RoleEnum.silver);
-		role_Service.myUpdate(role2);
+		roleService.myUpdate(role2);
 	}
 
 	@Test
@@ -107,7 +107,7 @@ public class PojoTest {
 		Assert.assertEquals(RoleEnum.normal, person.getRole().getValue());
 
 		Person person2 = personService.mySelectWithoutCache("nnn");
-		Role role = role_Service.mySelect("ccc");
+		Role role = roleService.mySelect("ccc");
 		person2.setRole(role);
 		personService.myUpdate(person2);
 	}
@@ -132,7 +132,7 @@ public class PojoTest {
 		cartService.myUpdate(cart);
 
 		Person zhangsan = personService.mySelect("mmm");
-		Role silver = role_Service.mySelect("bbb");
+		Role silver = roleService.mySelect("bbb");
 		zhangsan.setRole(silver);
 		personService.myUpdate(zhangsan);
 	}

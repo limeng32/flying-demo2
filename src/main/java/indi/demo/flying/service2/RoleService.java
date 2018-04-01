@@ -6,14 +6,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import indi.demo.flying.mapper2.Role_Mapper;
+import indi.demo.flying.mapper2.RoleMapper;
 import indi.demo.flying.pojo.Role;
 
 @Service
-public class Role_Service implements Role_Mapper {
+public class RoleService implements RoleMapper {
 
 	@Autowired
-	private Role_Mapper mapper;
+	private RoleMapper mapper;
 
 	@Override
 	public Role mySelectWithoutCache(Object id) {

@@ -9,7 +9,7 @@ import indi.mybatis.flying.annotations.CacheRoleAnnotation;
 import indi.mybatis.flying.statics.CacheRoleType;
 
 @CacheRoleAnnotation(ObserverClass = {}, TriggerClass = { Role.class })
-public interface Role_Mapper {
+public interface RoleMapper {
 
 	@CacheAnnotation(role = CacheRoleType.Observer)
 	public Role mySelectWithoutCache(Object id);
