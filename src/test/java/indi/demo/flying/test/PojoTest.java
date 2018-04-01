@@ -25,10 +25,12 @@ import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import com.github.springtestdbunit.dataset.FlatXmlDataSetLoader;
 
 import indi.demo.flying.pojo.Cart;
+import indi.demo.flying.pojo.CartCommodity;
 import indi.demo.flying.pojo.Commodity;
 import indi.demo.flying.pojo.Person;
 import indi.demo.flying.pojo.Role;
 import indi.demo.flying.pojo.RoleEnum;
+import indi.demo.flying.service.CartCommodityService;
 import indi.demo.flying.service.CartService;
 import indi.demo.flying.service.CommodityService;
 import indi.demo.flying.service2.PersonService;
@@ -46,6 +48,9 @@ public class PojoTest {
 
 	@Autowired
 	private CartService cartService;
+
+	@Autowired
+	private CartCommodityService cartCommodityService;
 
 	@Autowired
 	private CommodityService commodityService;
@@ -143,6 +148,16 @@ public class PojoTest {
 			@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = "/indi/demo/flying/test/pojoTest/testCartCommodity.dataSource.result.xml", connection = "dataSource1"),
 			@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = "/indi/demo/flying/test/pojoTest/testCartCommodity.dataSource2.result.xml", connection = "dataSource2"), })
 	public void testCartCommodity() {
+		CartCommodity cartCommodity = cartCommodityService.mySelect(100000000000001L);
+		Assert.assertEquals("普通会员", cartCommodity.getCart().getPerson().getRole().getName());
+		Assert.assertEquals("牙刷", cartCommodity.getCommodity().getName());
 
+		Cart cart = cartService.mySelect("bbb");
+		Commodity commodity = commodityService.mySelect("mmm");
+		CartCommodity cc = new CartCommodity();
+		cc.setCart(cart);
+		cc.setCommodity(commodity);
+		cc.setAmount(3);
+		cartCommodityService.myInsert(cc);
 	}
 }

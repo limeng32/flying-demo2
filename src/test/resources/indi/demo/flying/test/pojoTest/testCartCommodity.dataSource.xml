@@ -1,5 +1,6 @@
 <dataset>
 	<CART ID="aaa" DEAL="0" DEAL_TIME="2017-09-10 00:00:00" PERSON_ID="mmm" />
+	<CART ID="bbb" DEAL="0" DEAL_TIME="2017-09-10 00:00:00" PERSON_ID="nnn" />
 
 	<COMMODITY ID="mmm" NAME="牙刷" PRICE="1000" />
 	<COMMODITY ID="nnn" NAME="牙膏" PRICE="2000" />
