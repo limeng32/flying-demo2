@@ -22,9 +22,11 @@ import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import com.github.springtestdbunit.dataset.FlatXmlDataSetLoader;
 
 import indi.demo.flying.pojo.Commodity;
+import indi.demo.flying.pojo.Person;
 import indi.demo.flying.pojo.Role;
 import indi.demo.flying.pojo.RoleEnum;
 import indi.demo.flying.service.CommodityService;
+import indi.demo.flying.service2.PersonService;
 import indi.demo.flying.service2.Role_Service;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -39,6 +41,9 @@ public class PojoTest {
 
 	@Autowired
 	private CommodityService commodityService;
+
+	@Autowired
+	private PersonService personService;
 
 	@Autowired
 	private Role_Service role_Service;
@@ -77,5 +82,15 @@ public class PojoTest {
 		role2.setName("银牌会员");
 		role2.setValue(RoleEnum.silver);
 		role_Service.myUpdate(role2);
+	}
+
+	@Test
+	@DatabaseSetup(type = DatabaseOperation.CLEAN_INSERT, value = "/indi/demo/flying/test/pojoTest/testPerson.xml", connection = "dataSource2")
+	@ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED, value = "/indi/demo/flying/test/pojoTest/testPerson.result.xml", connection = "dataSource2", override = false)
+	@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = "/indi/demo/flying/test/pojoTest/testPerson.result.xml", connection = "dataSource2")
+	public void testPerson() {
+		Person person = personService.mySelect("mmm");
+		Assert.assertEquals("张三", person.getName());
+		Assert.assertEquals(RoleEnum.normal, person.getRole().getValue());
 	}
 }

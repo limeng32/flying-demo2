@@ -2,14 +2,17 @@ package indi.demo.flying.pojo;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.apache.ibatis.type.JdbcType;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
 import indi.mybatis.flying.annotations.FieldMapperAnnotation;
-import indi.mybatis.flying.annotations.TableMapperAnnotation;
 
-@TableMapperAnnotation(tableName = "ROLE")
+@Table(name = "ROLE")
 public class Role implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -18,14 +21,15 @@ public class Role implements Serializable {
 	 * 主键，以UUID方式保存
 	 * 
 	 */
-	@FieldMapperAnnotation(dbFieldName = "ID", jdbcType = JdbcType.VARCHAR, isUniqueKey = true)
+	@Id
+	@Column(name = "ID")
 	private String id;
 
 	/**
 	 * role name
 	 * 
 	 */
-	@FieldMapperAnnotation(dbFieldName = "NAME", jdbcType = JdbcType.VARCHAR)
+	@Column(name = "NAME")
 	private String name;
 
 	/**
