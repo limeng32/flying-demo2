@@ -25,6 +25,8 @@
 			value="jdbc:h2:mem:realdb;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"></property>
 		<property name="username" value="sa"></property>
 		<property name="password" value=""></property>
+		<property name="minIdle" value="1" />
+		<property name="maxActive" value="2" />
 	</bean>
 	<!-- 测试环境下初始化dataSource表结构 -->
 	<jdbc:initialize-database data-source="dataSource1"
@@ -49,6 +51,8 @@
 			value="jdbc:h2:mem:realdb2;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"></property>
 		<property name="username" value="sa"></property>
 		<property name="password" value=""></property>
+		<property name="minIdle" value="1" />
+		<property name="maxActive" value="2" />
 	</bean>
 	<!-- 测试环境下初始化dataSource表结构 -->
 	<jdbc:initialize-database data-source="dataSource2"

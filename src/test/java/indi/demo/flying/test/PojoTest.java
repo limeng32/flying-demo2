@@ -15,16 +15,21 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.DatabaseSetups;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
+import com.github.springtestdbunit.annotation.DatabaseTearDowns;
 import com.github.springtestdbunit.annotation.DbUnitConfiguration;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
+import com.github.springtestdbunit.annotation.ExpectedDatabases;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import com.github.springtestdbunit.dataset.FlatXmlDataSetLoader;
 
+import indi.demo.flying.pojo.Cart;
 import indi.demo.flying.pojo.Commodity;
 import indi.demo.flying.pojo.Person;
 import indi.demo.flying.pojo.Role;
 import indi.demo.flying.pojo.RoleEnum;
+import indi.demo.flying.service.CartService;
 import indi.demo.flying.service.CommodityService;
 import indi.demo.flying.service2.PersonService;
 import indi.demo.flying.service2.Role_Service;
@@ -38,6 +43,9 @@ public class PojoTest {
 
 	@Autowired
 	private DataSource dataSource1;
+
+	@Autowired
+	private CartService cartService;
 
 	@Autowired
 	private CommodityService commodityService;
@@ -97,5 +105,30 @@ public class PojoTest {
 		Role role = role_Service.mySelect("ccc");
 		person2.setRole(role);
 		personService.myUpdate(person2);
+	}
+
+	@Test
+	@DatabaseSetups({
+			@DatabaseSetup(type = DatabaseOperation.CLEAN_INSERT, value = "/indi/demo/flying/test/pojoTest/testCart.dataSource.xml", connection = "dataSource1"),
+			@DatabaseSetup(type = DatabaseOperation.CLEAN_INSERT, value = "/indi/demo/flying/test/pojoTest/testCart.dataSource2.xml", connection = "dataSource2") })
+	@ExpectedDatabases({
+			@ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED, value = "/indi/demo/flying/test/pojoTest/testCart.dataSource.result.xml", connection = "dataSource1", override = false),
+			@ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED, value = "/indi/demo/flying/test/pojoTest/testCart.dataSource2.result.xml", connection = "dataSource2", override = false) })
+	@DatabaseTearDowns({
+			@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = "/indi/demo/flying/test/pojoTest/testCart.dataSource.result.xml", connection = "dataSource1"),
+			@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = "/indi/demo/flying/test/pojoTest/testCart.dataSource2.result.xml", connection = "dataSource2"), })
+	public void testCart() {
+		Cart cart = cartService.mySelect("aaa");
+		Assert.assertEquals("张三", cart.getPerson().getName());
+		Assert.assertEquals("普通会员", cart.getPerson().getRole().getName());
+
+		Person lisi = personService.mySelect("nnn");
+		cart.setPerson(lisi);
+		cartService.myUpdate(cart);
+
+		Person zhangsan = personService.mySelect("mmm");
+		Role silver = role_Service.mySelect("bbb");
+		zhangsan.setRole(silver);
+		personService.myUpdate(zhangsan);
 	}
 }
