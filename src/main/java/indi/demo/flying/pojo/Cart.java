@@ -44,7 +44,7 @@ public class Cart implements Serializable {
 	 * 跨数据源关联 person
 	 * 
 	 */
-	@FieldMapperAnnotation(dbFieldName = "PERSON_ID", jdbcType = JdbcType.VARCHAR, dbCrossedAssociationUniqueKey = "id")
+	@FieldMapperAnnotation(dbFieldName = "PERSON_ID", jdbcType = JdbcType.VARCHAR, dbCrossedAssociationUniqueKey = "_ID")
 	private Person person;
 
 	private java.util.Collection<CartCommodity> cartCommodity;

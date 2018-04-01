@@ -55,8 +55,8 @@ create table ROLE
 
 create table PERSON
 (
-   ID         			varchar(40) not null ,
+   _ID         			varchar(40) not null ,
    NAME                 varchar(40) ,
    ROLE_ID            	varchar(40) ,
-   primary key (ID)
+   primary key (_ID)
 );

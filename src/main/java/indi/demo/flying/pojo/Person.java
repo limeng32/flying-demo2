@@ -22,7 +22,7 @@ public class Person implements Serializable {
 	 * 
 	 */
 	@Id
-	@Column(name = "ID")
+	@Column(name = "_ID")
 	private String id;
 
 	/**
@@ -36,7 +36,7 @@ public class Person implements Serializable {
 	 * 关联角色
 	 * 
 	 */
-	@FieldMapperAnnotation(dbFieldName = "ROLE_ID", jdbcType = JdbcType.VARCHAR, dbAssociationUniqueKey = "id")
+	@FieldMapperAnnotation(dbFieldName = "ROLE_ID", jdbcType = JdbcType.VARCHAR, dbAssociationUniqueKey = "ID")
 	private Role role;
 
 	private java.util.Collection<Cart> cart;

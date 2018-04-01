@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="indi.demo.flying.mapper2.PersonMapper">
+<mapper namespace="indi.demo.flying.mapper.CartCommodityMapper">
 	<cache />
 
 	<select id="mySelectWithoutCache" resultMap="result" useCache="false">
-		flying#{?}(smartDataSource2:realdb2):select
+		flying#{?}(smartDataSource1:realdb):select
 	</select>
 
 	<select id="mySelect" resultMap="result">
@@ -23,9 +23,9 @@
 		flying:count
 	</select>
 
-	<!-- 采用 flying 内置的 “无横线的uuid” 生成器，其余内置属性可参见 indi.mybatis.flying.statics.KeyGeneratorType -->
+	<!-- 模仿真实业务场景，此处主键生成采用雪花方式 -->
 	<insert id="myInsert">
-		flying:insert(uuid_no_line)
+		flying:insert(indi.demo.flying.handler.DistributedSnowflakeKeyGenerator)
 	</insert>
 
 	<update id="myUpdate">
@@ -40,11 +40,13 @@
 		flying:delete
 	</delete>
 
-	<resultMap id="result" type="Person" autoMapping="true">
-		<id property="id" column="_ID" />
-		<result property="name" column="NAME" />
-		<association property="role" javaType="Role"
-			select="indi.demo.flying.mapper2.Role_Mapper.mySelectWithoutCache"
-			column="ROLE_ID" />
+	<resultMap id="result" type="CartCommodity" autoMapping="true">
+		<id property="id" column="ID" />
+		<association property="cart" javaType="Cart"
+			select="indi.demo.flying.mapper.CartMapper.mySelectWithoutCache"
+			column="CART_ID" />
+		<association property="commodity" javaType="Commodity"
+			select="indi.demo.flying.mapper.CommodityMapper.mySelectWithoutCache"
+			column="COMM_ID" />
 	</resultMap>
 </mapper>

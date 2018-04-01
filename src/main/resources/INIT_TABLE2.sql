@@ -66,10 +66,10 @@ values ('3', '金牌会员', 'gold');
 
 create table PERSON
 (
-   ID         			varchar(40) not null ,
+   _ID         			varchar(40) not null ,
    NAME                 varchar(40) ,
    ROLE_ID            	varchar(40) ,
-   primary key (ID)
+   primary key (_ID)
 );
 
 insert into PERSON

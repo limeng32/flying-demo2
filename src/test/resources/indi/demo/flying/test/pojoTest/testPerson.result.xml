@@ -1,6 +1,6 @@
 <dataset>
-	<PERSON ID="mmm" NAME="张三" ROLE_ID="aaa" />
-	<PERSON ID="nnn" NAME="李四" ROLE_ID="ccc" />
+	<PERSON _ID="mmm" NAME="张三" ROLE_ID="aaa" />
+	<PERSON _ID="nnn" NAME="李四" ROLE_ID="ccc" />
 
 	<ROLE ID="aaa" NAME="普通会员" VALUE="normal" />
 	<ROLE ID="bbb" NAME="银牌会员" VALUE="silver" />

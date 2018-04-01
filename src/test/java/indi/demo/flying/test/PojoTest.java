@@ -131,4 +131,18 @@ public class PojoTest {
 		zhangsan.setRole(silver);
 		personService.myUpdate(zhangsan);
 	}
+
+	@Test
+	@DatabaseSetups({
+			@DatabaseSetup(type = DatabaseOperation.CLEAN_INSERT, value = "/indi/demo/flying/test/pojoTest/testCartCommodity.dataSource.xml", connection = "dataSource1"),
+			@DatabaseSetup(type = DatabaseOperation.CLEAN_INSERT, value = "/indi/demo/flying/test/pojoTest/testCartCommodity.dataSource2.xml", connection = "dataSource2") })
+	@ExpectedDatabases({
+			@ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED, value = "/indi/demo/flying/test/pojoTest/testCartCommodity.dataSource.result.xml", connection = "dataSource1", override = false),
+			@ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED, value = "/indi/demo/flying/test/pojoTest/testCartCommodity.dataSource2.result.xml", connection = "dataSource2", override = false) })
+	@DatabaseTearDowns({
+			@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = "/indi/demo/flying/test/pojoTest/testCartCommodity.dataSource.result.xml", connection = "dataSource1"),
+			@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = "/indi/demo/flying/test/pojoTest/testCartCommodity.dataSource2.result.xml", connection = "dataSource2"), })
+	public void testCartCommodity() {
+
+	}
 }

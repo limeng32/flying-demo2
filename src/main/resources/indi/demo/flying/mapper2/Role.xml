@@ -3,7 +3,7 @@
 <mapper namespace="indi.demo.flying.mapper2.Role_Mapper">
 	<cache />
 
-	<select id="mySelectWithoutCache" resultMap="result">
+	<select id="mySelectWithoutCache" resultMap="result" useCache="false">
 		flying#{?}(smartDataSource2:realdb2):select
 	</select>
 
