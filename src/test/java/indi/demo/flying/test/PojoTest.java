@@ -102,11 +102,11 @@ public class PojoTest {
 	@ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED, value = "/indi/demo/flying/test/pojoTest/testPerson.result.xml", connection = "dataSource2", override = false)
 	@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = "/indi/demo/flying/test/pojoTest/testPerson.result.xml", connection = "dataSource2")
 	public void testPerson() {
-		Person person = personService.mySelectWithoutCache("mmm");
+		Person person = personService.selectForAssociation("mmm");
 		Assert.assertEquals("张三", person.getName());
 		Assert.assertEquals(RoleEnum.normal, person.getRole().getValue());
 
-		Person person2 = personService.mySelectWithoutCache("nnn");
+		Person person2 = personService.selectForAssociation("nnn");
 		Role role = roleService.mySelect("ccc");
 		person2.setRole(role);
 		personService.myUpdate(person2);

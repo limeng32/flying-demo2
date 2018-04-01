@@ -15,8 +15,8 @@ public class CommodityService implements CommodityMapper {
 	private CommodityMapper mapper;
 
 	@Override
-	public Commodity mySelectWithoutCache(Object id) {
-		return mapper.mySelectWithoutCache(id);
+	public Commodity selectForAssociation(Object id) {
+		return mapper.selectForAssociation(id);
 	}
 
 	@Override

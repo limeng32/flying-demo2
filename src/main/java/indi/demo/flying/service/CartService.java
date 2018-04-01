@@ -16,8 +16,8 @@ public class CartService implements CartMapper {
 	private CartMapper mapper;
 
 	@Override
-	public Cart mySelectWithoutCache(Object id) {
-		return mapper.mySelectWithoutCache(id);
+	public Cart selectForAssociation(Object id) {
+		return mapper.selectForAssociation(id);
 	}
 
 	@Override

@@ -12,7 +12,7 @@ import indi.mybatis.flying.statics.CacheRoleType;
 public interface PersonMapper {
 
 	@CacheAnnotation(role = CacheRoleType.Observer)
-	public Person mySelectWithoutCache(Object id);
+	public Person selectForAssociation(Object id);
 
 	@CacheAnnotation(role = CacheRoleType.Observer)
 	public Person mySelect(Object id);

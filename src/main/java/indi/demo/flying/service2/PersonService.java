@@ -16,8 +16,8 @@ public class PersonService implements PersonMapper {
 	private PersonMapper mapper;
 
 	@Override
-	public Person mySelectWithoutCache(Object id) {
-		return mapper.mySelectWithoutCache(id);
+	public Person selectForAssociation(Object id) {
+		return mapper.selectForAssociation(id);
 	}
 
 	@Override

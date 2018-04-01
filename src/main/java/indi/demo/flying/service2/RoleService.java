@@ -16,8 +16,8 @@ public class RoleService implements RoleMapper {
 	private RoleMapper mapper;
 
 	@Override
-	public Role mySelectWithoutCache(Object id) {
-		return mapper.mySelectWithoutCache(id);
+	public Role selectForAssociation(Object id) {
+		return mapper.selectForAssociation(id);
 	}
 
 	@Override

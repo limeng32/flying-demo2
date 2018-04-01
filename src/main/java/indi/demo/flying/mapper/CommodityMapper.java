@@ -11,7 +11,7 @@ import indi.mybatis.flying.statics.CacheRoleType;
 public interface CommodityMapper {
 
 	@CacheAnnotation(role = CacheRoleType.Observer)
-	public Commodity mySelectWithoutCache(Object id);
+	public Commodity selectForAssociation(Object id);
 	
 	@CacheAnnotation(role = CacheRoleType.Observer)
 	public Commodity mySelect(Object id);

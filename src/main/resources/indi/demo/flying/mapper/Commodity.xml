@@ -3,7 +3,7 @@
 <mapper namespace="indi.demo.flying.mapper.CommodityMapper">
 	<cache />
 
-	<select id="mySelectWithoutCache" resultMap="result" useCache="false">
+	<select id="selectForAssociation" resultMap="result" useCache="false">
 		flying#{?}(smartDataSource1:realdb):select
 	</select>
 

@@ -12,7 +12,7 @@ import indi.mybatis.flying.statics.CacheRoleType;
 public interface CartMapper {
 
 	@CacheAnnotation(role = CacheRoleType.Observer)
-	public Cart mySelectWithoutCache(Object id);
+	public Cart selectForAssociation(Object id);
 
 	@CacheAnnotation(role = CacheRoleType.Observer)
 	public Cart mySelect(Object id);

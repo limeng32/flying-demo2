@@ -3,7 +3,7 @@
 <mapper namespace="indi.demo.flying.mapper.CartMapper">
 	<cache />
 
-	<select id="mySelectWithoutCache" resultMap="result" useCache="false">
+	<select id="selectForAssociation" resultMap="result" useCache="false">
 		flying#{?}(smartDataSource1:realdb):select
 	</select>
 
@@ -45,7 +45,7 @@
 		<result property="deal" column="DEAL" />
 		<result property="dealTime" column="DEAL_TIME" />
 		<association property="person" javaType="Person"
-			select="indi.demo.flying.mapper2.PersonMapper.mySelectWithoutCache"
+			select="indi.demo.flying.mapper2.PersonMapper.selectForAssociation"
 			column="PERSON_ID" />
 	</resultMap>
 </mapper>
