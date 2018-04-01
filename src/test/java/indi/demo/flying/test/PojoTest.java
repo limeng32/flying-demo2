@@ -22,7 +22,10 @@ import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import com.github.springtestdbunit.dataset.FlatXmlDataSetLoader;
 
 import indi.demo.flying.pojo.Commodity;
+import indi.demo.flying.pojo.Role;
+import indi.demo.flying.pojo.RoleEnum;
 import indi.demo.flying.service.CommodityService;
+import indi.demo.flying.service2.Role_Service;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class,
@@ -36,6 +39,9 @@ public class PojoTest {
 
 	@Autowired
 	private CommodityService commodityService;
+
+	@Autowired
+	private Role_Service role_Service;
 
 	@Test
 	public void test() {
@@ -57,5 +63,19 @@ public class PojoTest {
 		Commodity commodity2 = commodityService.mySelect("nnn");
 		Assert.assertEquals(2000, commodity2.getPrice().intValue());
 		commodityService.myDelete(commodity2);
+	}
+
+	@Test
+	@DatabaseSetup(type = DatabaseOperation.CLEAN_INSERT, value = "/indi/demo/flying/test/pojoTest/testRole.xml", connection = "dataSource2")
+	@ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED, value = "/indi/demo/flying/test/pojoTest/testRole.result.xml", connection = "dataSource2", override = false)
+	@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = "/indi/demo/flying/test/pojoTest/testRole.result.xml", connection = "dataSource2")
+	public void testRole() {
+		Role role = role_Service.mySelect("aaa");
+		Assert.assertEquals("普通会员", role.getName());
+
+		Role role2 = role_Service.mySelect("bbb");
+		role2.setName("银牌会员");
+		role2.setValue(RoleEnum.silver);
+		role_Service.myUpdate(role2);
 	}
 }
