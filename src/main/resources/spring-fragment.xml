@@ -16,7 +16,7 @@
        	http://www.springframework.org/schema/tx
        	http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 
-	<context:component-scan base-package="indi.demo.flying.*, indi.mybatis.flying.bean" />
+	<context:component-scan base-package="indi.demo.flying.*, indi.mybatis.flying" />
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="configLocation" value="classpath:Configuration.xml" />
@@ -39,8 +39,8 @@
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory2" />
 	</bean>
 
-	<!-- 在component的base-package中加入indi.mybatis.flying.bean，或者在这里明确声明indi.mybatis.flying.bean.ApplicationContextProvider -->
-	<!-- <bean id="applicationContextProvder" class="indi.mybatis.flying.bean.ApplicationContextProvider" 
+	<!-- 在component的base-package中加入indi.mybatis.flying.bean，或者在这里明确声明indi.mybatis.flying.ApplicationContextProvider -->
+	<!-- <bean id="applicationContextProvder" class="indi.mybatis.flying.ApplicationContextProvider" 
 		/> -->
 
 </beans>
