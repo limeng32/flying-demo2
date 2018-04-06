@@ -39,8 +39,8 @@
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory2" />
 	</bean>
 
-	<!-- 在component的base-package中加入indi.mybatis.flying.bean，或者在这里明确声明indi.mybatis.flying.ApplicationContextProvider -->
-	<!-- <bean id="applicationContextProvder" class="indi.mybatis.flying.ApplicationContextProvider" 
+	<!-- 在component的base-package中加入indi.mybatis.flying，或者在这里明确声明indi.mybatis.flying.FlyingContextProvider -->
+	<!-- <bean id="applicationContextProvder" class="indi.mybatis.flying.FlyingContextProvider" 
 		/> -->
 
 </beans>
