@@ -1,6 +1,6 @@
 # mybatis.flying 自动映射 pojo 跨库并使用二级缓存 的 demo2
 
-（对应当前最新版 flying 的分支为 `use-flying-0.9.3` ）
+（对应当前最新版 flying 的分支为 `use-flying-0.9.4` ）
 
 How to play？
 
@@ -87,7 +87,7 @@ http://localhost:8080/flying-demo2/getCartCommodityByPersonId1OrId2?id1=${用户
 
 不刷新缓存的编辑会员级别：http://localhost:8080/flying-demo2/updateRoleDirectlyWithoutCache?id=${会员级别的id}&name=${会员级别的名称}
 
-以上方法的实现代码可见： https://github.com/limeng32/flying-demo2/blob/use-flying-0.9.3/src/main/java/indi/demo/flying/web/CommonController.java 
+以上方法的实现代码可见： https://github.com/limeng32/flying-demo2/blob/use-flying-0.9.4/src/main/java/indi/demo/flying/web/CommonController.java 
 
 从 `use-flying-0.9.3` 分支开始我们采用双向相关的方式构建 pojo，以求打造一个真实可用的电商前台，关于双向相关的详细信息请见： https://my.oschina.net/u/2280950/blog/1580056
 
