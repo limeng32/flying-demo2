@@ -1,4 +1,4 @@
-FROM dojomadness/alpine-jdk8-maven:latest
+FROM alpine-jdk8-maven:latest
 
 # add pom.xml and source code
 ADD ./pom.xml pom.xml
