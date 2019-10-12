@@ -1,4 +1,4 @@
-FROM alpine-jdk8-maven:latest
+FROM registry.cn-hangzhou.aliyuncs.com/kennylee/maven:latest
 
 # add pom.xml and source code
 ADD ./pom.xml pom.xml
