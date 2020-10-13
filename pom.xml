@@ -127,7 +127,7 @@
 		<unitils.version>3.4.2</unitils.version>
 		<cglib-nodep.version>2.2.2</cglib-nodep.version>
 		<servlet.version>3.0.1</servlet.version>
-		<junit.version>4.12</junit.version>
+		<junit.version>4.13.1</junit.version>
 	</properties>
 	<build>
 		<finalName>flying-demo2</finalName>
